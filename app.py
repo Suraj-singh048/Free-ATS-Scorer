@@ -23,7 +23,7 @@ app = Flask(__name__)
 # -------------------------------------------------------------------------
 #  1. LOAD SKILLS & SYNONYMS
 # -------------------------------------------------------------------------
-SKILL_CSV_PATH = "ATS/skill_data/allskills.csv"
+SKILL_CSV_PATH = "skill_data/allskills.csv"
 skills_df = pd.read_csv(SKILL_CSV_PATH)
 
 ALL_SKILLS = set(skills_df["skill"].str.lower().unique())
