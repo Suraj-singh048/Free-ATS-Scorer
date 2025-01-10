@@ -1,0 +1,8 @@
+Flask
+gunicorn
+nltk
+pandas
+PyPDF2
+python-docx
+rapidfuzz
+scikit-learn
