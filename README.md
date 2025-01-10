@@ -1,4 +1,5 @@
 # Free ATS Scorer
+- **Checkout our application**: [https://sps-free-ats-scorer.onrender.com](https://sps-free-ats-scorer.onrender.com)
 
 **Free ATS Scorer** is a web application that compares candidate resumes against a given job description. It uses NLP techniques (via NLTK), fuzzy matching, weighted skills, and TF-IDF cosine similarity to generate an ATS-like score, highlight matched skills, and identify any missing skills.
 
