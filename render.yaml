@@ -4,7 +4,7 @@ services:
     name: SPS-free-ats-scorer    # Change this if you want a different service name
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn main:app"
+    startCommand: "gunicorn app:app"
 
     # Optional: Set the plan to 'free' explicitly
     plan: free
