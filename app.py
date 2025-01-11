@@ -16,6 +16,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Download essential NLTK data if needed
 nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quiet=True)
 nltk.download("stopwords", quiet=True)
 nltk.download("wordnet", quiet=True)
 
