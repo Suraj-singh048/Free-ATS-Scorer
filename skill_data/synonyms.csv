@@ -1,0 +1,96 @@
+skill,synonyms
+excel,"microsoft excel;ms excel;excel spreadsheet;spreadsheet software"
+power bi,"microsoft power bi;ms power bi"
+tableau,"tableau desktop;tableau prep;tableau server"
+sql,"structured query language;sql server;mysql;postgresql;pl/sql;oracle sql"
+r,"r programming;r language;r scripting"
+data wrangling,"data cleaning;data munging;data preprocessing;data pre-processing"
+data visualization,"data viz;charts and graphs;visual analytics"
+data mining,"knowledge discovery in databases;kdd"
+statistical analysis,"stats;statistical modeling"
+python,"python3;py"
+machine learning,"ml;supervised learning;unsupervised learning;reinforcement learning"
+deep learning,"dl;neural networks;cnn;rnn;transformer"
+scikit-learn,"sklearn;scikit learn;scikit"
+tensorflow,"tf;tensorflow 2.0"
+pytorch,"torch;pytorch lightning"
+big data,"large-scale data;hadoop;hdfs;spark;hadoop ecosystem"
+nlp,"natural language processing;text analytics;text mining"
+cloud computing,"aws;amazon web services;azure;microsoft azure;gcp;google cloud platform"
+html,"hypertext markup language"
+css,"cascading style sheets"
+javascript,"js"
+node.js,"node;node js;nodejs"
+react,"reactjs;react.js"
+angular,"angularjs;angular.js"
+vue,"vue.js;vuejs"
+django,
+flask,
+project management,"pmp;managing projects"
+git,"version control;github;gitlab"
+docker,"docker containers;docker image;containerization;docker-compose"
+kubernetes,"k8s;cluster orchestration;helm;minikube"
+airflow,"apache airflow;airflow dag;airflow pipelines"
+dbt,"data build tool;dbt cloud"
+databricks,"azure databricks;databricks notebooks"
+pyspark,"spark python;apache spark"
+mlflow,"ml flow;ml lifecycle management"
+dvc,"data version control"
+hugging face,"huggingface;transformers library"
+transformers,"bert;gpt;roberta;llm"
+xgboost,"extreme gradient boosting"
+lightgbm,"light gradient boosting machine"
+feature engineering,"feature transformation;feature extraction"
+model deployment,"model serving;deployment pipeline"
+azure data factory,"adf"
+power automate,"microsoft power automate;flow"
+power apps,"microsoft power apps"
+snowflake,"snowflake db;snowflake warehouse"
+kafka,"apache kafka;kafka streams"
+jenkins,"jenkins pipeline"
+devops,"ci/cd;continuous integration;continuous delivery"
+microservices,"microservice architecture;service mesh"
+tdd,"test driven development"
+graphql,
+redux,
+next.js,"nextjs"
+typescript,"ts"
+tailwind css,"tailwindcss"
+scss,"sass;sassy css"
+fastapi,"fast api"
+streamlit,
+bootstrap,
+aws lambda,"lambda function"
+amazon ec2,"ec2 instance;aws ec2"
+amazon s3,"s3 bucket;aws s3"
+amazon rds,"aws rds;relational database service"
+terraform,
+ansible,
+cloudformation,
+bigquery,"google bigquery"
+llm,"large language model"
+chatgpt,"gpt-4;gpt3.5"
+prompt engineering,
+stream processing,"streaming data;realtime processing"
+neural networks,"deep neural networks;artificial neural networks"
+product analytics,
+testing,"software testing"
+qa,"quality assurance"
+cypress,
+jest,
+mocha,
+nest.js,"nestjs"
+express.js,"expressjs"
+rest api,"restful api;rest architecture"
+json api,
+graph neural networks,"gnn"
+mlops,"machine learning operations"
+data ops,"data operations"
+azure devops,
+google cloud build,"gcp cloud build"
+openai api,
+flask restx,"flask restplus;flask restx extension"
+python scripting,"python automation"
+data lake,
+lakehouse,
+reactivex,"rxpy;observable"

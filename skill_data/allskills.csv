@@ -1,4 +1,802 @@
 skill
+python
+r
+data wrangling
+data cleaning
+data visualization
+sql
+tableau
+power bi
+machine learning
+supervised learning
+unsupervised learning
+deep learning
+scikit-learn
+tensorflow
+keras
+pytorch
+big data
+spark
+hadoop
+hive
+pandas
+numpy
+scipy
+matplotlib
+seaborn
+ggplot2
+statistics
+statsmodels
+regression analysis
+classification
+clustering
+time series
+data mining
+feature engineering
+hyperparameter tuning
+model selection
+model evaluation
+cross-validation
+random forest
+xgboost
+catboost
+lightgbm
+anomaly detection
+reinforcement learning
+data storytelling
+data presentation
+a/b testing
+experiment design
+nlp
+spacy
+text mining
+hugging face
+chatgpt
+prompt engineering
+llm
+mlops
+mlflow
+dvc
+azure ml
+google cloud ml
+sagemaker
+data ethics
+business intelligence
+google analytics
+ab test design
+excel
+data dashboards
+kpi analysis
+google data studio
+correlation analysis
+dimension reduction
+pca
+lda
+data exploration
+data profiling
+auto ml
+neural networks
+rnn
+cnn
+transformer
+gradient descent
+bayesian methods
+data governance
+data quality
+data lineage
+collaborative filtering
+recommendation systems
+confusion matrix
+scikit learn pipelines
+interpretability
+shap
+lime
+rapids.ai
+power query
+data lake
+lakehouse
+polars
+prophet
+data balancing
+oversampling
+python scripting
+etl
+elt
+spark
+pyspark
+airflow
+data pipeline
+dbt
+kafka
+confluent
+kinesis
+glue
+step functions
+azure data factory
+snowflake
+redshift
+bigquery
+data lake
+lakehouse
+delta lake
+hive
+pig
+flume
+hbase
+presto
+trino
+databricks
+data orchestration
+azure synapse
+data partitioning
+pipeline automation
+data ingestion
+streaming
+batch processing
+real-time analytics
+data modeling
+star schema
+snowflake schema
+dimension table
+fact table
+scd
+azure cosmos db
+cassandra
+mongodb
+dynamodb
+data warehouse
+glue catalogs
+data lineage
+data governance
+s3
+gcs
+azure blob
+linux
+shell scripting
+bash
+docker
+kubernetes
+helm
+ansible
+terraform
+cloudformation
+ci/cd
+version control
+git
+gitlab
+github actions
+jenkins
+devops
+agile
+scrum
+data quality
+data validation
+scala
+java
+ephemeral clusters
+serverless
+lambda
+event-driven
+offset management
+schema registry
+partitioning
+data retention
+hudi
+iceberg
+data mesh
+mesh architecture
+open data lake
+restful api
+load balancing
+microservices
+sla
+concurrency
+parallelism
+message queues
+vpc
+firewall
+security
+gcp dataflow
+oracle
+greenplum
+c
+c++
+java
+c#
+python
+go
+rust
+scala
+node.js
+.net
+spring
+spring boot
+maven
+gradle
+microservices
+restful
+soap
+graphql
+agile
+scrum
+tdd
+bdd
+test automation
+junit
+nunit
+jest
+mocha
+cypress
+selenium
+postman
+swagger
+openapi
+design patterns
+oop
+solid
+data structures
+algorithms
+concurrency
+threading
+memory management
+performance optimization
+distributed systems
+docker
+kubernetes
+cloud computing
+aws
+azure
+google cloud
+devops
+ci/cd
+jenkins
+github actions
+gitlab ci
+unit testing
+integration testing
+system design
+architecture
+domain-driven design
+event-driven
+message queue
+rabbitmq
+apache kafka
+serverless
+aws lambda
+azure functions
+microfrontends
+cors
+cdn
+redis
+memcached
+database indexing
+normalization
+code reviews
+refactoring
+documentation
+debugging
+logging
+monitoring
+observability
+new relic
+datadog
+splunk
+grafana
+prometheus
+concurrency patterns
+pair programming
+code coverage
+mocking
+wiremock
+cucumber
+ephemeral environments
+trunk-based dev
+feature flags
+release management
+versioning
+legacy systems
+cloud-native
+horizontal scaling
+vertical scaling
+expo
+html
+css
+javascript
+typescript
+react
+angular
+vue
+svelte
+next.js
+nuxt.js
+nest.js
+express.js
+fastify
+meteor
+remix
+react router
+redux
+vuex
+pinia
+context api
+rxjs
+tailwind css
+bootstrap
+material ui
+primefaces
+scss
+less
+webpack
+babel
+rollup
+vite
+parcel
+yarn
+npm
+pnpm
+node.js
+server-side rendering
+universal rendering
+progressive web apps
+service workers
+react hooks
+front-end testing
+jest
+cypress
+storybook
+atomic design
+design systems
+responsive design
+cross browser compatibility
+single page application
+jamstack
+graphql
+apollo
+rest api
+soap api
+axios
+fetch
+local storage
+session storage
+cookies
+auth0
+oauth
+jwt
+web sockets
+socket.io
+real-time updates
+chat applications
+firebase
+aws amplify
+netlify
+vercel
+heroku
+google app engine
+domain management
+hosting
+cdn
+caching
+route53
+cloudflare
+ssl
+access control
+role-based auth
+csrf protection
+xss prevention
+performance audits
+lighthouse
+lazy loading
+code splitting
+serverless functions
+devops
+github pages
+monorepo
+micro-frontend
+synergy
+i18n
+a11y
+plugin development
+build pipelines
+debugging
+electron
+polars
+datatable
+plotly
+dash
+streamlit
+azure machine learning
+google vertex ai
+hugging face hub
+openai whisper
+stable diffusion
+dreambooth
+azure openai
+google cloud auto ml
+azure analytics services
+apache superset
+dataiku
+mosaic ml
+interpretml
+auto-sklearn
+auto-keras
+wandb
+comet ml
+deepnote
+python notebooks
+azure notebooks
+collibra
+data robot
+azure power bi
+google analytics 4
+amplitudes
+python dash
+python plotly
+anaconda
+google big lake
+azure data lake analytics
+min.io
+ibm spss stats
+ibm spss modeler
+ibm watson studio
+azure time series insights
+python stats
+python data classes
+ckan
+data portal
+wise
+scrum for data science
+analytics translation
+auto ml
+google sheet
+dbt analytics
+pm4py
+process mining
+azure data share
+data lake analytics
+jasp
+jamovi
+data versioning
+feature store
+concept drift
+azure analysis services
+google analytics funnel
+data environment manager
+azure stream analytics
+azure synapse analytics
+big ml
+flaml
+fedml
+python survey
+data calibration
+amazon quicksight
+ibm cognos analytics
+statgraphics
+jump
+quickcalc
+data squirrel
+glean
+data weaving
+mlproject
+python illusions
+python tvtk
+azure charts
+chart studio
+clustergrammer
+python hvplot
+crosstab analysis
+local interpretability
+partial dependence
+azure descriptive stats
+python woe
+multi-armed bandits
+azure text analytics
+google text analytics
+azure batch ai
+google colab pro
+azure data wrangler
+pivoting
+azure machine learning pipelines
+data health checks
+azure synapse pipeline
+azure data explorer
+google data fusion
+google data prep
+google data form
+snowpark
+databricks delta
+databricks mlflow
+azure data share
+azure event grid
+azure hdinsight
+google composer
+google big table
+google logging
+cloud spanner
+cloud sql
+azure sql db
+azure postgresql
+azure mysql
+google postgresql
+google mysql
+google cloud run
+amazon athena
+amazon glue catalog
+aws glue studio
+azure data catalog
+confluent connect
+schema registry confluent
+atlas
+azure cosmos sql
+amazon document db
+google firestore
+partition strategy
+fraction based partition
+partition pruning
+azure function triggers
+azure batch
+google batch
+dataflow streaming
+spark on kubernetes
+azkaban
+keboola
+sql mesh
+dagster
+prefect
+inbound data pipeline
+outbound data pipeline
+multi cloud
+hybrid cloud
+data gating
+data drift
+azure devops for data
+google data pipeline
+azure key vault
+secrets manager
+google secret manager
+credential management
+snowflake external table
+snowflake stage
+google dataflow flex
+azure event hub triggers
+rabbitmq streams
+local stack
+s3 event triggers
+google pubsub triggers
+azure data movement library
+beam python
+beam scala
+kafka connect
+confluent replicator
+fluvio
+redpanda
+solace pubsub
+azure pipeline yaml
+kusto
+azure data bricks connect
+oracle goldengate
+data bridging
+delta live tables
+glue job bookmarks
+azure active directory integration
+google identity aware proxy
+twisted python
+data lake partition
+incremental data load
+type 2 dimension
+azure time series insights ( TSI )
+open lineage
+marquez
+data monkey
+data pipeline testing
+great expectations
+soda sql
+dbt tests
+pipeline debugging
+pipeline refactoring
+azure cosmos db spark
+azure table storage
+google big table streaming
+ephemeral pipeline
+wsl
+msix
+swiftui
+jetpack compose
+flutter
+reactive programming
+akka
+micronaut
+quarkus
+helidon
+nest
+tornado python
+bottle python
+gin golang
+fiber go
+rocket rust
+tide rust
+micrometer
+jhipster
+jooq
+querydsl
+lombok
+mockito
+powermock
+spock framework
+wiremock stubs
+testcontainers
+pact
+contract testing
+archunit
+microprofile
+eureka
+config server
+hystrix
+resilience4j
+dev mode
+remote debugging
+performance profiling
+memory leak detection
+leakcanary
+new relic apm
+open telemetry
+open tracing
+distributed tracing
+logs correlation
+chaos engineering
+gremlin
+litmus
+code scanning
+black (python)
+clang-format
+scalameta
+checkstyle
+pmd
+findbugs
+spotbugs
+sonarcloud
+sonar lint
+code smells
+cyclomatic complexity
+recursion patterns
+concurrency models
+actor model
+concurrency debugging
+concurrency testing
+semaphores
+locks
+blocking queue
+queue depth
+ephemeral environment
+revolve
+ephemeral db
+ephemeral test environment
+background jobs
+cron expressions
+quartz scheduler
+sidekiq
+resque
+delayed job
+concurrency library
+memory overhead
+memory thrashing
+i/o optimization
+bloom filter
+skipping set
+hashing strategies
+orchard
+orchard core
+orchard framework
+static code analysis
+cyclomatic
+modular architecture
+plugin architecture
+code injection
+autopatching
+dynamic module loading
+code generation
+annotation processing
+reflection optimization
+code instrumentation
+astro
+hydrogen
+spree commerce
+next commerce
+store.js
+strapi
+keystone.js
+contentful
+sanity.io
+ghost cms
+statamic
+gridsome
+gatsby
+micro frontends
+single spa
+module federation
+fuse.js
+prisma
+typeorm
+objection.js
+bookshelf.js
+react server components
+solid.js
+alpine.js
+pouchdb
+realm db
+lovefield
+formik
+redwoodjs
+blitz.js
+serverless express
+next auth
+remix auth
+azure static web apps
+google firebase hosting
+supabase
+hasura
+appwrite
+amplify hosting
+vitepress
+vuepress
+docusaurus
+sveltekit
+kitql
+windi css
+unocss
+daisyui
+chakra ui
+bulma
+foundation
+milligram
+xp css
+sematic ui
+blueprint.js
+onion architecture
+hexagonal architecture
+clean architecture
+adapter pattern
+advanced redux
+redux saga
+redux thunk
+recoil
+zustand
+jotai
+graphql code generator
+apollo federation
+urql
+rxjs operators
+rxjs subjects
+dynamic imports
+microservices in front-end
+micro-lc
+open components
+vtl
+moustache
+handlebars
+ejs
+pug
+server components
+streaming rendering
+incremental static regeneration
+swr
+react query
+tanstack query
+vue query
+pinch-zoom
+perspective api
+chrome devtools
+firefox devtools
+node inspector
+vs code debug
+console tricks
+puppeteer
+playwright
+electron builder
+electron forge
+electron react boilerplate
+directus
+appsmith
+backstage
 Adobe Systems Adobe Acrobat
 AdSense Tracker
 Atlassian JIRA

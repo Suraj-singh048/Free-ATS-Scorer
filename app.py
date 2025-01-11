@@ -1,4 +1,5 @@
 import io
+import csv
 import nltk
 import pandas as pd
 from flask import Flask, request, render_template
@@ -6,7 +7,7 @@ from PyPDF2 import PdfReader
 from docx import Document
 
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords, wordnet
+from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 from rapidfuzz import fuzz
@@ -21,88 +22,52 @@ nltk.download("wordnet", quiet=True)
 app = Flask(__name__)
 
 # -------------------------------------------------------------------------
-#  1. LOAD SKILLS & SYNONYMS
+#  1. LOAD SKILLS & FILE-BASED SYNONYMS + WEIGHTS
 # -------------------------------------------------------------------------
 SKILL_CSV_PATH = "skill_data/allskills.csv"
-skills_df = pd.read_csv(SKILL_CSV_PATH)
+SYNONYMS_CSV_PATH = "skill_data/synonyms.csv"
+WEIGHTS_CSV_PATH = "skill_data/skill_weights.csv"
 
+skills_df = pd.read_csv(SKILL_CSV_PATH)
 ALL_SKILLS = set(skills_df["skill"].str.lower().unique())
 
-SYNONYMS = {
-    # Data Analysis / BI
-    "excel": ["microsoft excel", "ms excel", "excel spreadsheet", "spreadsheet software"],
-    "power bi": ["microsoft power bi", "ms power bi"],
-    "tableau": ["tableau desktop", "tableau prep", "tableau server"],
-    "sql": ["structured query language", "sql server", "mysql", "postgresql", "pl/sql", "oracle sql"],
-    "r": ["r programming", "r language", "r scripting"],
-    "data wrangling": ["data cleaning", "data munging", "data preprocessing", "data pre-processing"],
-    "data visualization": ["data viz", "charts and graphs", "visual analytics"],
-    "data mining": ["knowledge discovery in databases", "kdd"],
-    "statistical analysis": ["stats", "statistical modeling"],
+def load_synonyms_from_csv(filepath) -> dict:
+    """
+    Load synonyms from a CSV with columns:
+      skill, synonyms (semicolon-separated)
+    Returns a dict: { skill: [synonym1, synonym2, ...], ... }
+    """
+    synonyms_dict = {}
+    with open(filepath, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            skill = row["skill"].strip().lower()
+            # Split the synonyms on semicolon, strip whitespace
+            if row["synonyms"].strip():
+                syn_list = [s.strip().lower() for s in row["synonyms"].split(";")]
+            else:
+                syn_list = []
+            synonyms_dict[skill] = syn_list
+    return synonyms_dict
 
-    # Data Science / Machine Learning
-    "python": ["python3", "py"],
-    "machine learning": ["ml", "supervised learning", "unsupervised learning", "reinforcement learning"],
-    "deep learning": ["dl", "neural networks", "cnn", "rnn", "transformer"],
-    "scikit-learn": ["sklearn", "scikit learn", "scikit"],
-    "tensorflow": ["tf", "tensorflow 2.0"],
-    "pytorch": ["torch", "pytorch lightning"],
-    "big data": ["large-scale data", "hadoop", "hdfs", "spark", "hadoop ecosystem"],
-    "nlp": ["natural language processing", "text analytics", "text mining"],
-    "cloud computing": ["aws", "amazon web services", "azure", "microsoft azure", "gcp", "google cloud platform"],
+def load_weights_from_csv(filepath) -> dict:
+    """
+    Load skill weights from a CSV with columns:
+      skill, weight
+    Returns a dict: { skill: float_weight, ... }
+    """
+    weights_dict = {}
+    with open(filepath, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            skill = row["skill"].strip().lower()
+            weight = float(row["weight"].strip())
+            weights_dict[skill] = weight
+    return weights_dict
 
-    # Full-Stack Development
-    "html": ["hypertext markup language"],
-    "css": ["cascading style sheets"],
-    "javascript": ["js"],
-    "node.js": ["node", "node js", "nodejs"],
-    "react": ["reactjs", "react.js"],
-    "angular": ["angularjs", "angular.js"],
-    "vue": ["vue.js", "vuejs"],
-    "django": [],
-    "flask": [],
-
-    # Project Management
-    "project management": ["pmp", "managing projects"]
-}
-
-SKILL_WEIGHTS = {
-    # Data Analysis / BI
-    "excel": 1.0,
-    "power bi": 1.2,
-    "tableau": 1.2,
-    "sql": 1.5,
-    "r": 2.0,
-    "data wrangling": 1.8,
-    "data visualization": 1.8,
-    "data mining": 2.0,
-    "statistical analysis": 2.0,
-
-    # Data Science / ML
-    "python": 2.0,
-    "machine learning": 2.5,
-    "deep learning": 2.5,
-    "scikit-learn": 2.0,
-    "tensorflow": 2.0,
-    "pytorch": 2.5,
-    "big data": 2.0,
-    "nlp": 2.2,
-    "cloud computing": 2.0,
-
-    # Full-Stack
-    "html": 1.0,
-    "css": 1.0,
-    "javascript": 1.8,
-    "node.js": 2.0,
-    "react": 1.8,
-    "angular": 1.8,
-    "vue": 1.6,
-    "django": 1.5,
-    "flask": 1.5,
-
-    # Project Management
-    "project management": 1.5
-}
+# Load synonyms and skill weights from CSV
+SYNONYMS = load_synonyms_from_csv(SYNONYMS_CSV_PATH)
+SKILL_WEIGHTS = load_weights_from_csv(WEIGHTS_CSV_PATH)
 
 # -------------------------------------------------------------------------
 #  2. FILE TEXT EXTRACTION
@@ -139,44 +104,47 @@ def extract_text_in_memory(file) -> str:
 stop_words = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
 
-def nltk_tokenize_and_lemmatize(text: str) -> list:
+def tokenize_and_normalize(text: str) -> str:
     """
-    Tokenize, remove stopwords/punctuation, and lemmatize the text.
+    1. Tokenize text.
+    2. Keep alpha-only tokens.
+    3. Remove stopwords.
+    4. Lemmatize.
+    5. Return a single string for easier substring and fuzzy matching.
     """
     tokens = word_tokenize(text.lower())
-    clean_tokens = []
+    cleaned = []
     for t in tokens:
         if t.isalpha() and t not in stop_words:
-            clean_tokens.append(lemmatizer.lemmatize(t))
-    return clean_tokens
+            cleaned.append(lemmatizer.lemmatize(t))
+    return " ".join(cleaned)
 
 # -------------------------------------------------------------------------
-#  4. MATCHING FUNCTIONS
+#  4. PHRASE & FUZZY MATCHING
 # -------------------------------------------------------------------------
-def phrase_match(full_text: str, skill_pool: set) -> set:
+def phrase_match(normalized_text: str, skill_pool: set) -> set:
     """
-    Direct substring check for each skill/synonym in the text.
+    Direct substring check for each skill + its synonyms in the normalized text.
     """
     found_skills = set()
-    lower_text = full_text.lower()
     for skill in skill_pool:
+        # synonyms + skill itself
         variants = [skill] + SYNONYMS.get(skill, [])
         for variant in variants:
-            if variant.lower() in lower_text:
+            if variant.lower() in normalized_text:
                 found_skills.add(skill)
                 break
     return found_skills
 
-def fuzzy_match(full_text: str, skill_pool: set, threshold=80) -> set:
+def fuzzy_match(normalized_text: str, skill_pool: set, threshold=80) -> set:
     """
-    RapidFuzz partial ratio to find approximate matches above the threshold.
+    Use RapidFuzz partial ratio to find approximate matches above the threshold.
     """
     found_skills = set()
-    lower_text = full_text.lower()
     for skill in skill_pool:
         variants = [skill] + SYNONYMS.get(skill, [])
         for variant in variants:
-            score = fuzz.partial_ratio(variant.lower(), lower_text)
+            score = fuzz.partial_ratio(variant.lower(), normalized_text)
             if score >= threshold:
                 found_skills.add(skill)
                 break
@@ -188,6 +156,7 @@ def fuzzy_match(full_text: str, skill_pool: set, threshold=80) -> set:
 def get_cosine_similarity(text1: str, text2: str) -> float:
     """
     TF-IDF-based cosine similarity between text1 and text2.
+    We do not strictly need to tokenize further; raw text is fine.
     """
     tfidf = TfidfVectorizer()
     matrix = tfidf.fit_transform([text1, text2])
@@ -200,6 +169,7 @@ def get_cosine_similarity(text1: str, text2: str) -> float:
 def calculate_weighted_ats(job_skills: set, matched_skills: set) -> float:
     """
     Compute skill coverage weighted by SKILL_WEIGHTS.
+    If a skill doesn't exist in SKILL_WEIGHTS, default to 1.0
     """
     total_score = 0.0
     matched_score = 0.0
@@ -229,23 +199,28 @@ def matcher():
     if not resume_files:
         return render_template("matchresume.html", message="Please upload at least one resume.")
 
-    jd_text_lower = job_description.lower()
+    # 1) Clean/normalize the job description text
+    jd_normalized_text = tokenize_and_normalize(job_description)
 
-    # Identify relevant JD skills
-    jd_phrase_skills = phrase_match(jd_text_lower, ALL_SKILLS)
-    jd_fuzzy_skills = fuzzy_match(jd_text_lower, ALL_SKILLS, threshold=85)
+    # 2) Identify relevant JD skills using phrase + fuzzy on the normalized JD
+    jd_phrase_skills = phrase_match(jd_normalized_text, ALL_SKILLS)
+    jd_fuzzy_skills = fuzzy_match(jd_normalized_text, ALL_SKILLS, threshold=85)
     jd_relevant_skills = jd_phrase_skills.union(jd_fuzzy_skills)
 
     results_data = []
     for f in resume_files:
-        resume_text = extract_text_in_memory(f)
+        # Extract and normalize the resume text
+        raw_resume_text = extract_text_in_memory(f)
+        normalized_resume_text = tokenize_and_normalize(raw_resume_text)
 
-        pm_matches = phrase_match(resume_text, jd_relevant_skills)
-        fm_matches = fuzzy_match(resume_text, jd_relevant_skills, threshold=80)
+        # Match skills using the same approach
+        pm_matches = phrase_match(normalized_resume_text, jd_relevant_skills)
+        fm_matches = fuzzy_match(normalized_resume_text, jd_relevant_skills, threshold=80)
         combined_skills = pm_matches.union(fm_matches)
 
+        # Compute missing skills, similarity (on raw text), and weighted ATS
         missing = jd_relevant_skills - combined_skills
-        cosim = round(get_cosine_similarity(job_description, resume_text), 3)
+        cosim = round(get_cosine_similarity(job_description, raw_resume_text), 3)
         ats_score = calculate_weighted_ats(jd_relevant_skills, combined_skills)
 
         results_data.append({
