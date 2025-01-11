@@ -1,4 +1,896 @@
 skill
+probabilistic programming
+data synthesis
+python polars
+data anonymization
+pattern recognition
+causal inference
+bayesian optimization
+spectral clustering
+feature normalization
+distribution fitting
+covariate analysis
+model drift detection
+hierarchical models
+graphical lasso
+topic modeling
+isolation forest
+meta-learning
+zero-shot learning
+representation learning
+automated exploratory analysis
+uncertainty quantification
+bayesian model averaging
+ordinal regression
+multiclass classification
+semiparametric models
+python statsmodels
+descriptive analytics
+polynomial regression
+quantile regression
+bayesian networks
+probabilistic forecasts
+likelihood estimation
+conditional probability tables
+graph-based data exploration
+data extrapolation
+entropy analysis
+data synergy
+data melting
+python stats notebooks
+structural equation modeling
+anova decomposition
+manova decomposition
+lifelines (survival analysis)
+multi-task learning
+inverse transform sampling
+mixture density networks
+dirichlet processes
+synthetic control methods
+uplift modeling
+causal trees
+time-series decomposition
+frequency domain analysis
+spectral density estimation
+wavelet transforms
+time warping
+event series analysis
+dynamic time warping
+stationarity checks
+ensemble model calibration
+model stacking
+asymmetric loss functions
+influential data detection
+residual analysis
+python prophet internals
+grand tour visualization
+data version audits
+variable encoding
+point processes
+survival function estimation
+k-prototypes clustering
+anomaly explanation
+model lineage
+semi-supervised classification
+semi-supervised clustering
+confidence intervals analysis
+influence functions
+robust regression
+multiphase data analysis
+drift visualization
+adaptive learning rate
+empirical distribution
+explainability dashboards
+model distillation
+post-hoc interpretability
+data augmentation generator
+density ratio estimation
+generative replay
+probabilistic embeddings
+pairwise distance metrics
+deductive reasoning
+structural breaks
+prior distribution selection
+eigendecomposition
+synthetic minority oversampling
+python rich (visual logs)
+data illusions
+trapezoidal rule integration
+sliding window analytics
+operator methods
+graph partitioning
+null hypothesis testing
+-- DATA ANALYST (100) --
+excel pivot charts
+excel macros vba
+google data blending
+tableau prep builder
+power query advanced
+power pivot advanced
+metabase dashboards
+looker blocks
+mode python notebooks
+klipfolio
+cyfe dashboards
+custom google analytics filters
+attribution modeling
+session replay analysis
+tag manager audits
+funnel optimization
+exploratory pivoting
+custom dimension creation
+behavior flow analysis
+segmentation strategies
+salesforce crm analytics
+zendesk explore
+hubspot reporting
+customer churn dashboards
+premium google analytics 360
+data gap analysis
+python excel automation
+data reconciliation
+data pivoting logic
+cohort-based metrics
+path analysis
+marketing mix modeling
+google optimize reports
+ad hoc report building
+layered insights
+kpi deep dive
+calculative fields
+user journey analytics
+customer segmentation trees
+dwell time insights
+power bi embedded
+qlik sense mashups
+row-level security
+big data aggregator
+data lineage tracking
+data usage audits
+record-level calculations
+data ops for analysts
+advanced slicers
+quick measure creation
+time intelligence
+predictive analytics add-ons
+custom shape maps
+dax expressions
+relationships modeling
+drillthrough filters
+influencer detection
+sharepoint analytics
+power automate flows
+data refresh scheduling
+data watermarking
+error bars
+advanced charting library
+interactive pivot tables
+excel data gateway
+google analytics sampling
+exclusion filters
+roas analysis
+multi-channel funnels
+multi-touch attribution
+landing page analytics
+understanding segments
+survey data integration
+key influencer charts
+flowcharting data
+dax studio
+power bi dataflows
+data bridging scripts
+workflow approval analytics
+revenue cycle dashboards
+paginated reports
+power pivot measure groups
+tableau interactive tooltips
+viz animations
+viz in tooltips
+tableau hyper extracts
+tableau web data connector
+marketing analytics studio
+looker ml
+looker merges
+looker explore
+session recordings
+usability metrics
+raw data imports
+data stacking merges
+dimension groups
+pivot layering
+google sheets scripts
+-- BUSINESS ANALYST (100) --
+requirement elicitation
+gap-fit analysis
+business rule automation
+stakeholder mapping
+impact feasibility matrix
+use case documentation
+cost-benefit assessment
+as-is process capture
+to-be process design
+kpi tree diagrams
+mckinsey 7s framework
+pestle analysis
+porter five forces extended
+root cause analysis (rca)
+swot matrix builder
+value stream mapping
+balanced scorecards
+business model canvas
+mo scow prioritization
+traceability matrices
+scenario planning
+operational readiness checks
+bpmn 2.0 modeling
+systems thinking
+six thinking hats
+benefits realization
+portfolio scoring
+business writing
+key performance indexing
+dashboard requirement specs
+product backlog refinement
+business glossary creation
+process re-engineering
+conjoint analysis
+market sizing strategies
+buy vs build analysis
+target operating model
+lean canvas
+supplier evaluation matrix
+activity-based costing
+roi scenario building
+break-even analysis
+decision tree modeling
+problem framing
+voice of the customer
+kanban system design
+cultural analysis
+data dictionary building
+raci matrix creation
+tqm concepts
+value chain analysis
+steep analysis
+organizational culture auditing
+mind mapping
+risk appetite profiling
+user acceptance testing plans
+stakeholder register
+requirement sign-off
+operational kpis
+service blueprinting
+benchmarking metrics
+enterprise architecture alignment
+pest analysis
+kpi tree expansions
+project chartering
+scope baseline checks
+organogram analysis
+workflow diagramming
+functional decomposition
+bottleneck identification
+cost driver analysis
+user story acceptance criteria
+enterprise analysis
+governance structures
+current state baseline
+product roadmapping
+vendor evaluation
+feasibility checks
+operational risk management
+compliance requirement analysis
+kpi maturity assessment
+mendelow matrix
+persona building
+tactical planning
+incremental improvements
+investment appraisal
+change impact logs
+jobs to be done
+rfi/rfp processes
+target benefit states
+benefit mapping
+use case refinement
+organizational readiness
+policy gap analysis
+balanced scorecard perspectives
+esc escalation path
+center of excellence planning
+project closure analysis
+strategy mapping
+business alignment
+-- MACHINE LEARNING (100) --
+few-shot learning
+contrastive learning
+transformer encoder
+transformer decoder
+vision transformers
+gan inversion
+progressive growing gans
+neural tangent kernels
+bayesian deep nets
+machine unlearning
+federated averaging
+privacy preserving ml
+hypernetworks
+gradient checkpointing
+curriculum learning
+neural architecture search
+random search optimization
+hyperband
+dropblock regularization
+stochastic weight averaging
+self-labeling
+pseudo-labelling
+swarm optimization
+active learning loops
+certainty sampling
+ensemble distillation
+deep kernel learning
+probabilistic embeddings
+hypergraph neural nets
+relational inductive biases
+unsupervised representation
+masked language modeling
+attention rollout
+contrastive divergence
+autoregressive flows
+normalizing flows
+implicit differentiable rendering
+symbolic regression
+neurosymbolic ai
+gradient-based meta-learning
+few-shot segmentation
+metric learning
+ordinal classification
+label smoothing
+temperature scaling
+block-sparse matrices
+mixture of experts (moe)
+layer normalization
+reptile algorithm
+model searching
+fasttext embeddings
+umap embeddings
+t-sne enhancements
+adaptive resonance theory
+ant colony optimization
+phylogenetic ml
+few-shot generative models
+style transfer networks
+bi-level optimization
+catastrophic forgetting solutions
+prototype networks
+bootstrap aggregating
+graph attention networks
+variational message passing
+flow-based generative models
+geometric deep learning
+spline cnns
+equivariant neural networks
+monte carlo dropout
+calibrated classifiers
+softmax gating
+artificial life simulations
+q-learning expansions
+deep q networks (advanced)
+parallel neural networks
+capsule networks v2
+memory-augmented networks
+layer-wise relevance propagation
+shapley value decomposition
+forget score
+rolling window ml
+autopytorch
+auto xgboost
+transformer memory networks
+logic-based networks
+weak supervision frameworks
+neural net pruning
+lottery ticket hypothesis
+dynamic inference skipping
+knowledge distillation advanced
+few-shot text classification
+neural ordinary differential eq
+reversible networks
+federated scenario testing
+federated dropout
+split learning
+edge ml optimization
+n-shot classification
+dynamic ensemble selection
+maml advanced
+bayesian dropout
+multilabel stratification
+heteroscedastic regression
+-- FRONT-END DEVELOPER (100) --
+micro ux interactions
+pixi.js
+three.js advanced
+framer motion
+react three fiber
+responsive fluid typography
+ar.js
+web midi api
+intlify (vue i18n)
+lit element
+wcag 2.2 updates
+aria-live regions
+emotion css
+css-in-js advanced
+stitches.js
+vite hmr
+react server components (advanced)
+vue composition api advanced
+svelte stores
+svelte kit advanced
+react concurrency mode
+esbuild bundler
+vitepress
+jest dom
+dom testing library
+test runner playwright
+visual regression tests
+cypress plugins
+loki visual testing
+snapshot testing advanced
+pnpm workspaces
+browser extension dev
+firefox add-on dev
+chrome extension manifest v3
+edge extension dev
+storybook addons advanced
+component story format
+chromatic visuals
+enzyme (legacy react)
+vrt with puppeteer
+performance paint timings
+lazy hydration
+astro build
+progressive hydration
+web gpu api
+service worker events
+background fetch
+paint api
+scroll timeline
+shared element transitions
+page visibility api
+requestidlecallback
+input device capabilities
+css motion path
+accent-color
+native lazy loading
+custom elements v1
+custom events
+vue single file components advanced
+react usecallback advanced
+solid start (solid.js)
+emotion theme
+babel macro
+rollup plugin advanced
+vue transitions advanced
+plop generator
+hybrid spa/ssr
+next image optimization
+nuxt bridge
+nuxt devtools
+svelte transitions advanced
+surplus js
+vite plugin pwa
+icons inlined
+partial hydration
+rest hooks
+zustand advanced
+recoil advanced
+vite split chunks
+postcss nesting
+css custom media
+tailwind jit
+unplugin icons
+webpack 6 alpha
+sass modules advanced
+css layering
+container queries
+snap points advanced
+css overscroll behavior
+web speech grammar
+web bluetooth
+vue test utils advanced
+svelte test library
+dom event simulation
+cross browser devtools
+husky pre-commit hooks
+lint-staged config
+-- BACK-END DEVELOPER (100) --
+actor model frameworks
+akka typed
+scala zio
+play framework advanced
+finatra
+micronaut data
+quarkus reactive
+helidon reactive
+node cluster module
+fastify caching
+koa composable middleware
+hapi route validation
+adonisjs
+featherjs
+loopback advanced
+bottle python advanced
+falcon python advanced
+aiohttp python
+masonite python
+raspberry pi cluster dev
+sanic python
+muffin python
+scout apm
+pyinstrument
+haystack tracing
+jmxtrans
+undertow server
+javalin framework
+packr
+warp (rust)
+tokio advanced
+hyper (rust)
+rocket (rust) advanced
+aws fargate
+aws copilot cli
+aws app runner
+azure container instances
+azure function python
+google cloud run triggers
+k3s
+hashicorp nomad
+traefik reverse proxy
+envoy filter config
+istio traffic routing
+linkerd advanced
+open policy agent
+opa envoy plugin
+gatekeeper
+vertical pod autoscaler
+keda event-driven
+rabbitmq exchange binding
+nats streaming
+emqx
+vault dynamic secrets
+consul kv
+config encryption
+distributed tracing advanced
+opentelemetry collector
+fluentbit
+loki logs
+cortex logs
+thanos
+jaeger advanced
+graphite
+perf tuning with flamegraphs
+py-spy profiling
+async profiling
+strangler pattern
+blue-green db migration
+health check endpoints
+circuit breaker design
+orleans framework
+grain programming
+celery advanced
+dq worker
+pm2 node
+nsolid
+runtime hooks
+python uvloop
+database migrations zero downtime
+hot reloading servers
+consistency patterns (advanced)
+ddb local
+cdc patterns
+cdc with debezium
+event store db
+temporal workflow
+camunda workflow
+argo workflow server
+continuous profiling
+spinnaker
+argocd
+authelia
+oauth2 proxy
+saml integration
+keycloak advanced
+-- APP DEVELOPER (100) --
+android jetpack navigation
+android hilt di
+android room advanced
+android workmanager
+android view binding advanced
+android camera x
+android multi-module
+android dynamic features
+android app bundle
+android constraintlayout advanced
+android auto apps
+android tv leanback
+android ble apis
+android accessibility advanced
+dagger assisted injection
+ndk advanced
+kotlin coroutines flow
+kotlin flow operators
+kotlin multiplatform mobile
+kotlin kapt
+swift combine
+swift concurrency
+swift structured concurrency
+ios coreml
+ios realitykit
+ios metal framework
+ios scene kit advanced
+ios vision framework
+ios weatherkit
+ios passkit advanced
+ios healthkit advanced
+ios watch connectivity
+ios background tasks
+ios usernotifications
+ios pencilkit
+react native reanimated
+react native gesture handler
+react native flipper
+flutter bloc pattern
+flutter riverpod
+flutter isolate
+flutter web renderer
+flutter animations advanced
+flutter slivers advanced
+flutter getx
+xamarin essentials
+xamarin forms shell
+unity c# job system
+unity timeline advanced
+unity cinemachine
+unity addressables
+unreal blueprint macros
+unreal c++ advanced
+unreal async tasks
+capacitorm do
+ionic advanced animations
+nativescript vue
+nativescript angular
+tizen .net
+tvos dev
+chromecast sender apps
+arcore android
+arkit ios
+corona sdk advanced
+godot gdscript advanced
+renoise tool dev
+detox e2e testing
+fastlane advanced
+testflight automation
+app store connect api
+hockeyapp
+firebase in-app messaging
+firebase remote config advanced
+onesignal push
+urban airship
+branch.io deep links
+appcenter codepush
+bitrise
+codemagic
+supersonic sdk
+poeditor mobile
+mobile measurement partners
+adjust advanced
+apps flyer advanced
+singular analytics
+firebase performance
+frameskipping detection
+fps meter
+cpu usage overlay
+bugsnag for mobile
+instabug
+leakcanary advanced
+instrumentation runner
+android monkey testing
+-- WEB DEVELOPER (100) --
+browser polyfills advanced
+browserslist config
+html template engines advanced
+pug mixins
+handlebars partials advanced
+ejs includes advanced
+slim templates
+http2 server push
+hsts preload
+csp strict mode
+referrer policy
+coep coop
+fetch metadata
+cors advanced config
+front-end security advanced
+subresource integrity
+json schema validation
+iso8583 parsing
+web crypto subtle
+json web signatures
+web assembly advanced
+rust wasm bindgen
+assemblyscript
+emscripten advanced
+vitest runner
+tap testing
+ava test runner
+mocha parallel
+universal fetch patterns
+spa transitions
+static site caching
+react static export
+vue press advanced
+gridsome plugins
+next export
+server push modules
+progressive server rendering
+partial server rendering
+edge computing worker
+cloudflare workers kv
+netlify edge functions
+aws cloudfront functions
+firebase hosting rewrites
+vercel edge caching
+es modules dynamic import
+import assertions
+yaml front matter
+sitemap generation
+web perf budgets
+tti measurement
+tti polyfills
+ruxit real user monitoring
+typescript decorators advanced
+custom eslintrc
+eslint plugin security
+stylelint advanced
+commitlint
+semantic release
+open components framework
+fuse.js advanced
+nprogress
+dom virtualization
+react window
+cluster map visual
+leaflet advanced
+kepler.gl
+d3 force layout
+webgl data viz
+web components advanced
+shadow dom advanced
+custom elements upgrades
+service worker caching advanced
+pwa offline forms
+declarative shadow dom
+virtual scroller
+node buffer advanced
+http parser
+dns resolution
+tls handshake detail
+http keep-alive tuning
+brotli compression
+zstd compression
+ssr caching
+long polling advanced
+sse advanced
+graph websocket
+h2c connection
+request coalescing
+resource hints
+prefetch dns
+preconnect advanced
+prefetch prerender
+trace route
+real user metrics
+time to interactive advanced
+perf paint analysis
+-- FULL-STACK DEVELOPER (100) --
+supabase full stack
+hasura remote joins
+blitz.js advanced
+redwoodjs cells
+remix loader actions
+capacitor full stack
+turborepo
+nx monorepo advanced
+lerna hoisting
+graphql apq
+apollo gateway advanced
+nexus schema
+typegraphql advanced
+keystone next
+adonisjs full stack
+feathersjs hooks advanced
+loopback relations advanced
+routing controllers
+sails.js blueprint advanced
+hugo serverless functions
+gatsby functions advanced
+eleventy shortcodes advanced
+jekyll advanced config
+jekyll plugins
+metalsmith transformations
+unibit dev
+vue nuxt static
+gridsome serverless
+quasar ssr
+ionic react advanced
+ionic vue advanced
+ionic capacitor bridging
+phoenix liveview advanced
+laravel octane
+laravel vapor
+symfony panther
+symfony encore advanced
+django channels advanced
+django ninja
+flask socketio advanced
+bottle beaker
+pyramid config
+fastapi websockets
+golang fiber advanced
+echo framework advanced
+gin gonic websockets
+rust actix advanced
+rust axum advanced
+scala play advanced
+asp.net blazor server
+asp.net blazor wasm
+.net maui
+razor pages advanced
+dotnet identity advanced
+dotnet microservices
+java spark framework
+kotlin ktor advanced
+kotlin exposed
+jwt cookie auth
+oauth2 pkce flow
+oidc advanced
+keycloak gatekeeper
+devise token auth
+omni auth advanced
+nuxt3 middleware
+nuxt3 server routes
+mongodb realm
+tigris dev
+amplify multi env
+azure static web hosting advanced
+aws amplify graphql
+gcp firebase triggers
+webhook triggers advanced
+segment integration
+snowplow micro
+heap analytics advanced
+logrocket advanced
+rollbar advanced
+datadog rum
+jitsi meet integration
+openvidu
+socketcluster
+pubnub advanced
+ably realtime
+cortex feature flags
+launchdarkly sdk
+flipt open source
+configcat
+konveyor
+spiffe spire
+boundary sessions
+github advanced sec
+gitlab advanced runner
+bitbucket pipelines advanced
+mermaid diagrams
+swagger codegen advanced
+openapi generator advanced
+openapi linting
+stoplight studio
 python
 r
 data wrangling
