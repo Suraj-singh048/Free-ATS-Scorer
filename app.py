@@ -1,6 +1,7 @@
 import io
 import csv
 import nltk
+import re
 import pandas as pd
 from flask import Flask, request, render_template
 from PyPDF2 import PdfReader
@@ -124,31 +125,36 @@ def tokenize_and_normalize(text: str) -> str:
 #  4. PHRASE & FUZZY MATCHING
 # -------------------------------------------------------------------------
 def phrase_match(normalized_text: str, skill_pool: set) -> set:
-    """
-    Direct substring check for each skill + its synonyms in the normalized text.
-    """
     found_skills = set()
     for skill in skill_pool:
         # synonyms + skill itself
         variants = [skill] + SYNONYMS.get(skill, [])
         for variant in variants:
-            if variant.lower() in normalized_text:
+            # Enforce word boundaries using \b
+            pattern = r"\b" + re.escape(variant.lower()) + r"\b"
+            if re.search(pattern, normalized_text):
                 found_skills.add(skill)
                 break
     return found_skills
 
 def fuzzy_match(normalized_text: str, skill_pool: set, threshold=80) -> set:
-    """
-    Use RapidFuzz partial ratio to find approximate matches above the threshold.
-    """
     found_skills = set()
+    # Split text into words or small windows
+    tokens = normalized_text.split()  # or use your own token list
     for skill in skill_pool:
         variants = [skill] + SYNONYMS.get(skill, [])
         for variant in variants:
-            score = fuzz.partial_ratio(variant.lower(), normalized_text)
-            if score >= threshold:
-                found_skills.add(skill)
-                break
+            # Check fuzzy match on each token:
+            for token in tokens:
+                score = fuzz.ratio(variant.lower(), token)
+                if score >= threshold:
+                    found_skills.add(skill)
+                    break
+            else:
+                # Keep going if we didn't break
+                continue
+            # We found a match for this skill; move to the next skill
+            break
     return found_skills
 
 # -------------------------------------------------------------------------
