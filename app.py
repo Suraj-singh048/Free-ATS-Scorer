@@ -335,8 +335,8 @@ def matcher():
 @app.route("/download_report", methods=["POST"])
 def download_report():
     """
-    This route downloads a "summary" report for all resumes in CSV.
-    (Original functionality remains the same, but we can also do DOC if needed.)
+    This route downloads a "summary" report for all resumes in DOCX format.
+    (Requires the python-docx library.)
     """
     try:
         results_json = request.form.get("results")
@@ -345,25 +345,39 @@ def download_report():
 
         results = json.loads(results_json)
 
-        # Create CSV in memory
-        output = io.StringIO()
-        writer = csv.writer(output)
-        writer.writerow(["Filename", "Matched Skills", "Missing Skills", "ATS Score", "Cosine Similarity"])
-        for result in results:
-            writer.writerow([
-                result["filename"],
-                "; ".join(result["matched_skills"]),
-                "; ".join(result["missing_skills"]),
-                result["ats_score"],
-                result["cosine_similarity"]
-            ])
-        output.seek(0)
+        # Create a new Word document in memory
+        doc = Document()
+        doc.add_heading('Summary Report', 0)
 
+        # Create a table with headers
+        table = doc.add_table(rows=1, cols=5)
+        hdr_cells = table.rows[0].cells
+        hdr_cells[0].text = "Filename"
+        hdr_cells[1].text = "Matched Skills"
+        hdr_cells[2].text = "Missing Skills"
+        hdr_cells[3].text = "ATS Score"
+        hdr_cells[4].text = "Cosine Similarity"
+
+        # Populate table rows
+        for result in results:
+            row_cells = table.add_row().cells
+            row_cells[0].text = result.get("filename", "")
+            row_cells[1].text = "; ".join(result.get("matched_skills", []))
+            row_cells[2].text = "; ".join(result.get("missing_skills", []))
+            row_cells[3].text = str(result.get("ats_score", ""))
+            row_cells[4].text = str(result.get("cosine_similarity", ""))
+
+        # Write the doc to a BytesIO object
+        temp_stream = io.BytesIO()
+        doc.save(temp_stream)
+        temp_stream.seek(0)
+
+        # Send the file to the user
         return send_file(
-            io.BytesIO(output.getvalue().encode()),
-            mimetype='text/csv',
+            temp_stream,
+            mimetype='application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             as_attachment=True,
-            download_name='report.csv'
+            download_name='report.docx'
         )
 
     except Exception as e:
