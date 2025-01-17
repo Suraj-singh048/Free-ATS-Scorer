@@ -155,7 +155,7 @@
                       <em>No matched skills.</em>
                     {% endif %}
                   </p>
-                  <p class="mb-0">
+                  <p class="mb-3">
                     <strong>Missing Skills:</strong><br />
                     {% if resume.missing_skills %}
                       {{ resume.missing_skills | join(', ') }}
@@ -163,8 +163,28 @@
                       <em>No missing skills.</em>
                     {% endif %}
                   </p>
+
+                  <!-- "Edit Resume" button appears if missing skills exist -->
+                  {% if resume.missing_skills %}
+                    <a 
+                      href="{{ url_for('edit_resume', filename=resume.filename) }}"
+                      class="btn btn-sm btn-warning"
+                    >
+                      Edit Resume
+                    </a>
+                  {% endif %}
                 </div>
               {% endfor %}
+
+              <!-- Download Report Button -->
+              <form id="download-form" method="POST" action="/download_report">
+                <input type="hidden" name="results" id="results-data" value='{{ top_resumes | tojson | safe }}' />
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-success">
+                    Download Report
+                  </button>
+                </div>
+              </form>
             {% else %}
               <p class="text-muted">
                 No resume analysis yet. Please upload a resume and provide the job description.
@@ -181,9 +201,9 @@
     <div class="container">
       <div>
         <strong>Developer:</strong> Suraj Singh &bull;
-        <a 
-          href="https://www.linkedin.com/in/suraj-singh-093a6822a" 
-          target="_blank" 
+        <a
+          href="https://www.linkedin.com/in/suraj-singh-093a6822a"
+          target="_blank"
           class="footer-link"
         >
           LinkedIn
