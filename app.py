@@ -31,6 +31,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s:%(mess
 
 # Download essential NLTK data
 nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quite=True)
 nltk.download("stopwords", quiet=True)
 nltk.download("wordnet", quiet=True)
 
