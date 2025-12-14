@@ -4,8 +4,11 @@
   "outputDirectory": "dist",
   "functions": {
     "api/matcher.js": {
-      "maxDuration": 300,
+      "maxDuration": 60,
       "memory": 1024
+    },
+    "api/health.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
