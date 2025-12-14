@@ -2,13 +2,11 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "installCommand": "npm install",
   "functions": {
-    "api/matcher.js": {
+    "api/**/*.js": {
       "maxDuration": 60,
       "memory": 1024
-    },
-    "api/health.js": {
-      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -16,5 +14,8 @@
       "source": "/api/(.*)",
       "destination": "/api/$1"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }

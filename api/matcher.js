@@ -10,18 +10,26 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  console.log('[Matcher] Function invoked');
+  console.log('[Matcher] Method:', req.method);
+  console.log('[Matcher] Headers:', JSON.stringify(req.headers));
+
   // Only allow POST
   if (req.method !== 'POST') {
+    console.log('[Matcher] Rejected - wrong method');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
     // Validate Gemini API key
+    console.log('[Matcher] Checking API key...');
     if (!process.env.GEMINI_API_KEY) {
+      console.error('[Matcher] API key missing');
       return res.status(500).json({
         error: 'Server configuration error: GEMINI_API_KEY not configured'
       });
     }
+    console.log('[Matcher] API key present');
 
     // Parse form data with formidable
     const form = formidable({
@@ -29,11 +37,16 @@ export default async function handler(req, res) {
       multiples: true,
     });
 
+    console.log('[Matcher] Starting form parse...');
     form.parse(req, async (err, fields, files) => {
       if (err) {
-        console.error('Form parse error:', err);
+        console.error('[Matcher] Form parse error:', err);
         return res.status(400).json({ error: 'Failed to parse form data' });
       }
+
+      console.log('[Matcher] Form parsed successfully');
+      console.log('[Matcher] Fields:', Object.keys(fields));
+      console.log('[Matcher] Files:', Object.keys(files));
 
       try {
         // Extract job description
