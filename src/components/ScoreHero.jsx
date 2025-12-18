@@ -22,36 +22,44 @@ const ScoreHero = ({
   const scoreLabel = getScoreLabel(score);
 
   return (
-    <div className={`bg-gradient-to-br from-primary-500 to-secondary-600 rounded-2xl p-8 text-white shadow-glow-lg ${className}`}>
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+    <div className={`bg-gradient-to-br from-primary-500 to-secondary-600 rounded-xl sm:rounded-2xl p-4 sm:p-8 text-white shadow-glow-lg ${className}`}>
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-8">
         {/* Left Side - Main Score */}
-        <div className="flex flex-col items-center md:items-start space-y-4">
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold mb-1">ATS Compatibility Score</h2>
-            <p className="text-primary-100 text-sm">
+        <div className="flex flex-col items-center md:items-start space-y-3 sm:space-y-4 w-full md:w-auto">
+          <div className="text-center md:text-left w-full">
+            <h2 className="text-xl sm:text-2xl font-bold mb-1">ATS Compatibility Score</h2>
+            <p className="text-primary-100 text-xs sm:text-sm">
               Comprehensive resume analysis
             </p>
           </div>
 
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 w-full">
             {/* Large Progress Ring */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-full p-4">
+            <div className="bg-white/10 backdrop-blur-sm rounded-full p-3 sm:p-4">
+              <ProgressRing
+                value={displayScore}
+                size={120}
+                strokeWidth={10}
+                color="auto"
+                animated={animate}
+                className="filter drop-shadow-lg sm:hidden"
+              />
               <ProgressRing
                 value={displayScore}
                 size={160}
                 strokeWidth={12}
                 color="auto"
                 animated={animate}
-                className="filter drop-shadow-lg"
+                className="filter drop-shadow-lg hidden sm:block"
               />
             </div>
 
             {/* Score Label */}
-            <div>
-              <div className={`inline-flex items-center px-4 py-2 rounded-full ${scoreLabel.bg} ${scoreLabel.color} font-semibold text-lg mb-2`}>
+            <div className="text-center sm:text-left w-full sm:w-auto">
+              <div className={`inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 rounded-full ${scoreLabel.bg} ${scoreLabel.color} font-semibold text-sm sm:text-lg mb-2`}>
                 {score >= 75 ? '✓' : score >= 40 ? '~' : '✗'} {scoreLabel.text}
               </div>
-              <p className="text-primary-100 text-sm max-w-xs">
+              <p className="text-primary-100 text-xs sm:text-sm max-w-xs mx-auto sm:mx-0">
                 {score >= 75
                   ? 'Your resume is well-optimized for ATS systems'
                   : score >= 40
@@ -106,9 +114,9 @@ const MetricCard = ({ label, value, animate }) => {
   const displayValue = animate ? Math.round(animatedValue) : value;
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 min-w-[120px]">
-      <div className="text-3xl font-bold mb-1">{displayValue}%</div>
-      <div className="text-primary-100 text-sm font-medium">{label}</div>
+    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 min-w-[100px] sm:min-w-[120px]">
+      <div className="text-2xl sm:text-3xl font-bold mb-1">{displayValue}%</div>
+      <div className="text-primary-100 text-xs sm:text-sm font-medium truncate">{label}</div>
     </div>
   );
 };

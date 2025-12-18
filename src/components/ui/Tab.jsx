@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 // Tab Context
 const TabContext = createContext();
@@ -23,8 +23,9 @@ export const Tabs = ({ children, defaultTab, onChange, className = '' }) => {
 export const TabList = ({ children, className = '' }) => {
   return (
     <div
-      className={`flex space-x-1 border-b border-gray-200 mb-6 ${className}`}
+      className={`flex overflow-x-auto space-x-1 border-b border-gray-200 mb-6 scrollbar-hide ${className}`}
       role="tablist"
+      style={{ WebkitOverflowScrolling: 'touch' }}
     >
       {children}
     </div>
@@ -44,8 +45,9 @@ export const TabButton = ({ id, children, icon, badge, className = '' }) => {
       id={`tab-${id}`}
       onClick={() => setActiveTab(id)}
       className={`
-        relative px-4 py-3 font-medium text-sm transition-all duration-200
+        relative px-3 sm:px-4 py-3 font-medium text-sm transition-all duration-200
         focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-t-lg
+        flex-shrink-0 whitespace-nowrap
         ${
           isActive
             ? 'text-primary-600 border-b-2 border-primary-500 bg-primary-50/50'
@@ -54,13 +56,14 @@ export const TabButton = ({ id, children, icon, badge, className = '' }) => {
         ${className}
       `}
     >
-      <span className="flex items-center space-x-2">
+      <span className="flex items-center space-x-1 sm:space-x-2">
         {icon && <span className={isActive ? 'text-primary-600' : 'text-gray-500'}>{icon}</span>}
-        <span>{children}</span>
+        <span className="hidden sm:inline">{children}</span>
+        <span className="inline sm:hidden text-xs">{children.split(' ')[0]}</span>
         {badge && (
           <span
             className={`
-            ml-2 px-2 py-0.5 text-xs rounded-full font-semibold
+            ml-1 sm:ml-2 px-1.5 sm:px-2 py-0.5 text-xs rounded-full font-semibold
             ${
               isActive
                 ? 'bg-primary-100 text-primary-700'

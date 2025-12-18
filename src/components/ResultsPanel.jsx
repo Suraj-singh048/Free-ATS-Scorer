@@ -73,7 +73,7 @@ function ResultsPanel({ results }) {
       <Card>
         <CardBody className="p-0">
           <Tabs defaultTab="overview">
-            <TabList className="px-6 pt-4">
+            <TabList className="px-2 sm:px-6 pt-4">
               <TabButton
                 id="overview"
                 icon={
@@ -120,7 +120,7 @@ function ResultsPanel({ results }) {
 
             {/* Overview Tab */}
             <TabPanel id="overview">
-              <div className="p-6 space-y-6">
+              <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                 {/* Quick Stats with Detailed Explanations */}
                 <div className="grid grid-cols-1 gap-4">
                   {/* Experience Match */}
@@ -153,22 +153,22 @@ function ResultsPanel({ results }) {
 
                 {/* Component Scores Breakdown */}
                 {resume.detailed_scoring?.ats_score?.component_scores && (
-                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-5 border border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
-                      <svg className="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 sm:p-5 border border-gray-200">
+                    <h3 className="font-semibold text-gray-800 mb-3 sm:mb-4 flex items-center text-sm sm:text-base">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                       </svg>
-                      ATS Score Components
+                      <span className="break-words">ATS Score Components</span>
                     </h3>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
                       {Object.entries(resume.detailed_scoring.ats_score.component_scores).map(([key, value]) => {
                         const weight = resume.detailed_scoring.ats_score.weights[key.replace('_score', '')] || 0;
                         return (
-                          <div key={key} className="bg-white rounded-lg p-3 border border-gray-200">
-                            <p className="text-xs text-gray-600 mb-1 capitalize">
+                          <div key={key} className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
+                            <p className="text-xs text-gray-600 mb-1 capitalize break-words leading-tight">
                               {key.replace('_score', '').replace('_', ' ')}
                             </p>
-                            <p className="text-2xl font-bold text-gray-800">{value}%</p>
+                            <p className="text-xl sm:text-2xl font-bold text-gray-800">{value}%</p>
                             <p className="text-xs text-gray-500 mt-1">Weight: {(weight * 100).toFixed(0)}%</p>
                           </div>
                         );
@@ -240,38 +240,38 @@ function ResultsPanel({ results }) {
 
             {/* AI Insights Tab */}
             <TabPanel id="insights">
-              <div className="p-6 space-y-6">
+              <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                 {resume.ai_insights && (
                   <>
                     {/* Experience Gap Analysis */}
                     {resume.ai_insights.experience_gap_analysis && (
-                      <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 border-2 border-purple-300 rounded-lg p-6">
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 border-2 border-purple-300 rounded-lg p-3 sm:p-6">
                         <div className="flex items-start mb-4">
                           <div className="flex-shrink-0">
-                            <svg className="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
                           </div>
-                          <div className="ml-4 flex-1">
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">Experience Gap Analysis</h3>
-                            <div className="grid grid-cols-3 gap-4 mb-4">
-                              <div className="bg-white rounded-lg p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1">Required</p>
-                                <p className="text-2xl font-bold text-purple-700">
+                          <div className="ml-3 sm:ml-4 flex-1 min-w-0">
+                            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 break-words">Experience Gap Analysis</h3>
+                            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
+                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
+                                <p className="text-xs text-gray-600 mb-1 truncate">Required</p>
+                                <p className="text-lg sm:text-2xl font-bold text-purple-700 break-words">
                                   {resume.ai_insights.experience_gap_analysis.required_years || 'N/A'}
                                   {resume.ai_insights.experience_gap_analysis.required_years && ' yrs'}
                                 </p>
                               </div>
-                              <div className="bg-white rounded-lg p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1">Your Experience</p>
-                                <p className="text-2xl font-bold text-purple-700">
+                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
+                                <p className="text-xs text-gray-600 mb-1 truncate">Your Exp.</p>
+                                <p className="text-lg sm:text-2xl font-bold text-purple-700 break-words">
                                   {resume.ai_insights.experience_gap_analysis.candidate_years || 'N/A'}
                                   {resume.ai_insights.experience_gap_analysis.candidate_years && ' yrs'}
                                 </p>
                               </div>
-                              <div className="bg-white rounded-lg p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1">Gap</p>
-                                <p className={`text-2xl font-bold ${
+                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
+                                <p className="text-xs text-gray-600 mb-1 truncate">Gap</p>
+                                <p className={`text-lg sm:text-2xl font-bold break-words ${
                                   (resume.ai_insights.experience_gap_analysis.gap || 0) <= 0 ? 'text-success-700' : 'text-danger-700'
                                 }`}>
                                   {resume.ai_insights.experience_gap_analysis.gap > 0 ? '-' : '+'}
@@ -279,8 +279,8 @@ function ResultsPanel({ results }) {
                                 </p>
                               </div>
                             </div>
-                            <div className="bg-white/70 rounded-lg p-4 mb-3">
-                              <p className="text-gray-800 leading-relaxed">
+                            <div className="bg-white/70 rounded-lg p-3 sm:p-4 mb-3">
+                              <p className="text-sm sm:text-base text-gray-800 leading-relaxed break-words">
                                 {resume.ai_insights.experience_gap_analysis.insight}
                               </p>
                             </div>
@@ -308,28 +308,28 @@ function ResultsPanel({ results }) {
                     {/* Critical Missing Skills with Deep Analysis */}
                     {resume.ai_insights.critical_missing_skills &&
                      resume.ai_insights.critical_missing_skills.length > 0 && (
-                      <div className="bg-gradient-to-br from-red-50 to-red-100/50 border-2 border-red-300 rounded-lg p-6">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                          <svg className="w-6 h-6 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="bg-gradient-to-br from-red-50 to-red-100/50 border-2 border-red-300 rounded-lg p-3 sm:p-6">
+                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center">
+                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                           </svg>
-                          Critical Missing Skills - Deep Analysis
+                          <span className="break-words">Critical Missing Skills - Deep Analysis</span>
                         </h3>
-                        <div className="space-y-4">
+                        <div className="space-y-3 sm:space-y-4">
                           {resume.ai_insights.critical_missing_skills.map((skillAnalysis, idx) => (
-                            <div key={idx} className="bg-white rounded-lg p-5 border-2 border-red-200 shadow-sm">
-                              <div className="flex items-start justify-between mb-3">
-                                <h4 className="text-xl font-bold text-red-700">{skillAnalysis.skill}</h4>
-                                <Badge variant="danger" size="sm">Critical</Badge>
+                            <div key={idx} className="bg-white rounded-lg p-3 sm:p-5 border-2 border-red-200 shadow-sm">
+                              <div className="flex items-start justify-between mb-3 gap-2">
+                                <h4 className="text-lg sm:text-xl font-bold text-red-700 break-words flex-1">{skillAnalysis.skill}</h4>
+                                <Badge variant="danger" size="sm" className="flex-shrink-0">Critical</Badge>
                               </div>
-                              <div className="space-y-3">
+                              <div className="space-y-2 sm:space-y-3">
                                 <div>
-                                  <p className="text-sm font-semibold text-gray-700 mb-1">Why This Matters:</p>
-                                  <p className="text-gray-600 bg-red-50/50 rounded p-3">{skillAnalysis.importance}</p>
+                                  <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-1">Why This Matters:</p>
+                                  <p className="text-sm text-gray-600 bg-red-50/50 rounded p-2 sm:p-3 break-words">{skillAnalysis.importance}</p>
                                 </div>
                                 <div>
-                                  <p className="text-sm font-semibold text-gray-700 mb-1">How to Demonstrate:</p>
-                                  <p className="text-gray-600 bg-green-50/50 rounded p-3">{skillAnalysis.how_to_demonstrate}</p>
+                                  <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-1">How to Demonstrate:</p>
+                                  <p className="text-sm text-gray-600 bg-green-50/50 rounded p-2 sm:p-3 break-words">{skillAnalysis.how_to_demonstrate}</p>
                                 </div>
                               </div>
                             </div>
@@ -353,7 +353,7 @@ function ResultsPanel({ results }) {
 
             {/* Skills Analysis Tab */}
             <TabPanel id="skills">
-              <div className="p-6 space-y-6">
+              <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                 {resume.skills_breakdown && Object.entries(resume.skills_breakdown).map(([category, skills]) => (
                   (skills.matched.length > 0 || skills.missing.length > 0) && (
                     <div key={category} className="border border-gray-200 rounded-lg p-5 bg-white">
@@ -408,25 +408,25 @@ function ResultsPanel({ results }) {
 
             {/* Recommendations Tab */}
             <TabPanel id="recommendations">
-              <div className="p-6 space-y-6">
+              <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                 {resume.recommendations && (
                   <>
                     {/* Priority Skills */}
                     {resume.recommendations.skills_to_add?.length > 0 && (
-                      <div className="bg-gradient-to-br from-warning-50 to-warning-100/50 border border-warning-200 rounded-lg p-5">
-                        <h3 className="font-semibold text-gray-800 mb-4 flex items-center text-lg">
-                          <svg className="w-5 h-5 mr-2 text-warning-600" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="bg-gradient-to-br from-warning-50 to-warning-100/50 border border-warning-200 rounded-lg p-3 sm:p-5">
+                        <h3 className="font-semibold text-gray-800 mb-3 sm:mb-4 flex items-center text-base sm:text-lg">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-warning-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
-                          Priority Skills to Add
+                          <span className="break-words">Priority Skills to Add</span>
                         </h3>
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {resume.recommendations.skills_to_add.slice(0, 8).map((rec, idx) => (
-                            <div key={idx} className="bg-white p-4 rounded-lg shadow-sm border border-warning-200/50 hover:border-primary-300 transition-colors">
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-1">
-                                    <span className="font-semibold text-gray-900">{rec.skill}</span>
+                            <div key={idx} className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-warning-200/50 hover:border-primary-300 transition-colors">
+                              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <span className="font-semibold text-gray-900 break-words">{rec.skill}</span>
                                     <Badge
                                       variant={
                                         rec.priority === 'critical' ? 'danger' :
@@ -437,14 +437,14 @@ function ResultsPanel({ results }) {
                                     >
                                       {rec.priority}
                                     </Badge>
-                                    <span className="text-xs text-gray-500 capitalize">• {rec.category}</span>
+                                    <span className="text-xs text-gray-500 capitalize break-words">• {rec.category}</span>
                                   </div>
                                   {rec.reason && (
-                                    <p className="text-sm text-gray-600">{rec.reason}</p>
+                                    <p className="text-xs sm:text-sm text-gray-600 break-words">{rec.reason}</p>
                                   )}
                                 </div>
-                                <div className="ml-4">
-                                  <span className="text-lg font-bold text-success-600">+{rec.impact}</span>
+                                <div className="sm:ml-4 flex-shrink-0">
+                                  <span className="text-base sm:text-lg font-bold text-success-600">+{rec.impact}</span>
                                 </div>
                               </div>
 
@@ -452,16 +452,16 @@ function ResultsPanel({ results }) {
                               {rec.suggested_experience_bullets && rec.suggested_experience_bullets.length > 0 && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
                                   <p className="text-xs font-semibold text-indigo-700 mb-2 flex items-center">
-                                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                     </svg>
-                                    Suggested Resume Bullets:
+                                    <span className="break-words">Suggested Resume Bullets:</span>
                                   </p>
                                   <ul className="space-y-2">
                                     {rec.suggested_experience_bullets.map((bullet, bidx) => (
-                                      <li key={bidx} className="text-sm bg-indigo-50 border border-indigo-200 rounded p-3 flex items-start">
+                                      <li key={bidx} className="text-xs sm:text-sm bg-indigo-50 border border-indigo-200 rounded p-2 sm:p-3 flex items-start">
                                         <span className="text-indigo-600 mr-2 flex-shrink-0">•</span>
-                                        <span className="text-gray-700 italic">{bullet}</span>
+                                        <span className="text-gray-700 italic break-words">{bullet}</span>
                                       </li>
                                     ))}
                                   </ul>
