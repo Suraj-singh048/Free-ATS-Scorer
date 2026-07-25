@@ -23,7 +23,7 @@ export const Tabs = ({ children, defaultTab, onChange, className = '' }) => {
 export const TabList = ({ children, className = '' }) => {
   return (
     <div
-      className={`flex overflow-x-auto space-x-1 border-b border-gray-200 mb-6 scrollbar-hide ${className}`}
+      className={`flex overflow-x-auto space-x-1.5 border-b border-slate-200 bg-slate-50/90 px-3 pt-3 rounded-t-2xl scrollbar-hide ${className}`}
       role="tablist"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
@@ -45,31 +45,30 @@ export const TabButton = ({ id, children, icon, badge, className = '' }) => {
       id={`tab-${id}`}
       onClick={() => setActiveTab(id)}
       className={`
-        relative px-3 sm:px-4 py-3 font-medium text-sm transition-all duration-200
-        focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-t-lg
-        flex-shrink-0 whitespace-nowrap
+        relative px-3.5 sm:px-5 py-3 font-bold text-xs sm:text-sm transition-all duration-150
+        focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-t-xl
+        flex-shrink-0 whitespace-nowrap cursor-pointer
         ${
           isActive
-            ? 'text-primary-600 border-b-2 border-primary-500 bg-primary-50/50'
-            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+            ? 'text-brand-700 bg-white border-t-2 border-x border-slate-200/90 border-t-brand-600 shadow-xs'
+            : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
         }
         ${className}
       `}
     >
-      <span className="flex items-center space-x-1 sm:space-x-2">
-        {icon && <span className={isActive ? 'text-primary-600' : 'text-gray-500'}>{icon}</span>}
-        <span className="hidden sm:inline">{children}</span>
-        <span className="inline sm:hidden text-xs">{children.split(' ')[0]}</span>
-        {badge && (
+      <span className="flex items-center space-x-1.5 sm:space-x-2">
+        {icon && <span className={isActive ? 'text-brand-600' : 'text-slate-500'}>{icon}</span>}
+        <span>{children}</span>
+        {badge !== undefined && badge !== null && (
           <span
             className={`
-            ml-1 sm:ml-2 px-1.5 sm:px-2 py-0.5 text-xs rounded-full font-semibold
-            ${
-              isActive
-                ? 'bg-primary-100 text-primary-700'
-                : 'bg-gray-200 text-gray-700'
-            }
-          `}
+              ml-1.5 px-2 py-0.5 text-[11px] rounded-full font-extrabold tracking-tight
+              ${
+                isActive
+                  ? 'bg-brand-100 text-brand-900'
+                  : 'bg-slate-200 text-slate-800'
+              }
+            `}
           >
             {badge}
           </span>
@@ -91,7 +90,7 @@ export const TabPanel = ({ id, children, className = '' }) => {
       role="tabpanel"
       id={`tabpanel-${id}`}
       aria-labelledby={`tab-${id}`}
-      className={`animate-fade-in ${className}`}
+      className={`animate-fade-in p-4 sm:p-6 bg-white rounded-b-2xl ${className}`}
     >
       {children}
     </div>

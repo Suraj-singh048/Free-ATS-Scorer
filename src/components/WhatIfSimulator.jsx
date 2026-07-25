@@ -8,12 +8,10 @@ function WhatIfSimulator({ result }) {
     certifications: []
   });
 
-  // Extract calculator data from result
   const calculator = result.what_if_calculator;
   const baseScore = result.ats_score;
   const missingSkills = result.skills_breakdown;
 
-  // Calculate new score based on added skills
   const simulatedScore = useMemo(() => {
     if (!calculator || !calculator.impact_per_skill) {
       return baseScore;
@@ -21,11 +19,9 @@ function WhatIfSimulator({ result }) {
 
     let newScore = baseScore;
 
-    // Apply formula from AI for each category
     Object.keys(addedSkills).forEach(category => {
       const count = addedSkills[category]?.length || 0;
       if (count > 0) {
-        // Map category names to weight keys
         const weightKeyMap = {
           technical_skills: 'technical_skill_weight',
           soft_skills: 'soft_skill_weight',
@@ -39,7 +35,6 @@ function WhatIfSimulator({ result }) {
       }
     });
 
-    // Cap at 100
     return Math.min(100, Math.round(newScore * 100) / 100);
   }, [addedSkills, baseScore, calculator]);
 
@@ -71,7 +66,6 @@ function WhatIfSimulator({ result }) {
   const scoreIncrease = simulatedScore - baseScore;
   const totalAddedSkills = Object.values(addedSkills).reduce((sum, arr) => sum + arr.length, 0);
 
-  // Category display names
   const categoryNames = {
     technical_skills: 'Technical Skills',
     soft_skills: 'Soft Skills',
@@ -80,36 +74,50 @@ function WhatIfSimulator({ result }) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-blue-50 border-2 border-purple-200 rounded-lg p-6 mt-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold text-gray-800 flex items-center">
-          <span className="mr-2">🔮</span> What-If Scenario Simulator
-        </h3>
+    <div className="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 sm:p-8 mt-6 shadow-soft">
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-brand-100 rounded-xl text-brand-700">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="text-lg sm:text-xl font-display font-extrabold text-slate-900">
+              Interactive What-If Score Simulator
+            </h3>
+            <p className="text-xs font-semibold text-slate-600">
+              Toggle missing skills below to project instant score increases in real time.
+            </p>
+          </div>
+        </div>
+
         {totalAddedSkills > 0 && (
           <button
+            type="button"
             onClick={handleReset}
-            className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full text-gray-700 font-medium transition-colors"
+            className="text-xs px-3.5 py-1.5 bg-slate-200 hover:bg-slate-300 rounded-xl text-slate-800 font-extrabold transition-colors shadow-xs"
           >
-            Reset
+            Reset All
           </button>
         )}
       </div>
 
-      <div className="bg-white rounded-lg p-4 mb-4 shadow-sm">
-        <div className="grid grid-cols-2 gap-4">
+      <div className="bg-white rounded-xl p-5 mb-6 border border-slate-200/90 shadow-xs">
+        <div className="grid grid-cols-2 gap-6">
           <div>
-            <p className="text-sm text-gray-600 mb-1">Current ATS Score</p>
-            <p className="text-3xl font-bold text-gray-800">{baseScore}%</p>
+            <p className="text-xs uppercase font-extrabold tracking-wider text-slate-500 mb-1">Current Score</p>
+            <p className="text-3xl font-extrabold text-slate-900">{baseScore}%</p>
           </div>
           <div>
-            <p className="text-sm text-gray-600 mb-1">Simulated Score</p>
-            <div className="flex items-baseline">
-              <p className={`text-3xl font-bold ${scoreIncrease > 0 ? 'text-green-600' : 'text-gray-800'}`}>
+            <p className="text-xs uppercase font-extrabold tracking-wider text-slate-500 mb-1">Simulated Score</p>
+            <div className="flex items-baseline space-x-2">
+              <p className={`text-3xl font-extrabold ${scoreIncrease > 0 ? 'text-emerald-700' : 'text-slate-900'}`}>
                 {simulatedScore}%
               </p>
               {scoreIncrease > 0 && (
-                <span className="text-sm ml-2 text-green-600 font-semibold">
-                  (+{scoreIncrease.toFixed(2)}%)
+                <span className="text-sm font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-300">
+                  +{scoreIncrease.toFixed(1)}%
                 </span>
               )}
             </div>
@@ -117,9 +125,9 @@ function WhatIfSimulator({ result }) {
         </div>
 
         {totalAddedSkills > 0 && (
-          <div className="mt-3 pt-3 border-t border-gray-200">
-            <p className="text-xs text-gray-600">
-              <span className="font-semibold">{totalAddedSkills}</span> skill{totalAddedSkills !== 1 ? 's' : ''} added to simulation
+          <div className="mt-4 pt-3 border-t border-slate-200">
+            <p className="text-xs font-bold text-slate-700">
+              <span className="text-brand-700 font-extrabold">{totalAddedSkills}</span> skill{totalAddedSkills !== 1 ? 's' : ''} added to active simulation
             </p>
           </div>
         )}
@@ -129,10 +137,10 @@ function WhatIfSimulator({ result }) {
       <div className="space-y-4">
         {Object.entries(missingSkills).map(([category, data]) => (
           data.missing && data.missing.length > 0 && (
-            <div key={category} className="bg-white rounded-lg p-4 shadow-sm">
-              <h4 className="font-semibold text-gray-700 mb-3 flex items-center">
-                <span className="text-sm uppercase tracking-wide">{categoryNames[category]}</span>
-                <span className="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+            <div key={category} className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200/90 shadow-xs">
+              <h4 className="font-extrabold text-slate-900 mb-3 flex items-center justify-between">
+                <span className="text-xs sm:text-sm uppercase tracking-wide text-slate-800">{categoryNames[category]}</span>
+                <span className="text-xs bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full font-bold border border-slate-200">
                   {data.missing.length} missing
                 </span>
               </h4>
@@ -142,17 +150,18 @@ function WhatIfSimulator({ result }) {
                   return (
                     <button
                       key={idx}
+                      type="button"
                       onClick={() => isAdded
                         ? handleRemoveSkill(category, skill)
                         : handleAddSkill(category, skill)
                       }
-                      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all transform hover:scale-105 ${
+                      className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all transform active:scale-95 cursor-pointer ${
                         isAdded
-                          ? 'bg-green-500 text-white shadow-md hover:bg-green-600'
-                          : 'bg-red-100 text-red-800 hover:bg-red-200'
+                          ? 'bg-emerald-600 text-white shadow-sm hover:bg-emerald-700 border border-emerald-700'
+                          : 'bg-rose-50 text-rose-950 hover:bg-rose-100 border border-rose-300'
                       }`}
                     >
-                      {isAdded ? '✓ ' : '+ '}{skill}
+                      {isAdded ? '✓ Added: ' : '+ Add: '}{skill}
                     </button>
                   );
                 })}
@@ -162,20 +171,14 @@ function WhatIfSimulator({ result }) {
         ))}
       </div>
 
-      <div className="mt-4 p-4 bg-blue-100 rounded-lg border border-blue-200">
-        <p className="text-sm text-gray-700">
-          <span className="font-semibold">💡 How it works:</span> Click on missing skills to add them to your resume simulation.
-          The score updates instantly using AI-calculated impact weights - no server calls needed!
+      <div className="mt-6 p-4 bg-brand-50 rounded-xl border border-brand-200 text-slate-800 flex items-start space-x-3">
+        <svg className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-1 9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+        </svg>
+        <p className="text-xs sm:text-sm leading-relaxed">
+          <span className="font-extrabold text-brand-900">How it works:</span> Click on missing skills to simulate including them in your resume. Scores adjust dynamically based on AI weight coefficients.
         </p>
       </div>
-
-      {!calculator || !calculator.impact_per_skill && (
-        <div className="mt-4 p-3 bg-yellow-100 rounded-lg border border-yellow-200">
-          <p className="text-sm text-yellow-800">
-            ⚠️ What-if calculator data not available from AI analysis.
-          </p>
-        </div>
-      )}
     </div>
   );
 }

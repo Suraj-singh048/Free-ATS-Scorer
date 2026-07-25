@@ -3,8 +3,15 @@ import { Tabs, TabList, TabButton, TabPanel } from './ui/Tab';
 import { Card, CardBody } from './ui/Card';
 import Badge from './ui/Badge';
 import ScoreHero from './ScoreHero';
+import StandaloneResultsPanel from './StandaloneResultsPanel';
+import AtsTextVisualizer from './AtsTextVisualizer';
+import CoverLetterGenerator from './CoverLetterGenerator';
+import InterviewPrep from './InterviewPrep';
 
 function ResultsPanel({ results }) {
+  if (results && (results.analysis_mode === 'resume_only' || results.top_resumes?.[0]?.analysis_mode === 'resume_only' || results.top_resumes?.[0]?.standalone_analysis)) {
+    return <StandaloneResultsPanel results={results} />;
+  }
 
   if (!results || !results.top_resumes || results.top_resumes.length === 0) {
     return (
@@ -97,6 +104,37 @@ function ResultsPanel({ results }) {
                 Skills Analysis
               </TabButton>
               <TabButton
+                id="ats_text"
+                icon={
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                }
+              >
+                ATS Visualizer
+              </TabButton>
+              <TabButton
+                id="cover_letter"
+                icon={
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                }
+              >
+                Cover Letter
+              </TabButton>
+              <TabButton
+                id="interview_prep"
+                icon={
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                }
+              >
+                Interview Prep
+              </TabButton>
+              <TabButton
                 id="insights"
                 icon={
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -153,9 +191,9 @@ function ResultsPanel({ results }) {
 
                 {/* Component Scores Breakdown */}
                 {resume.detailed_scoring?.ats_score?.component_scores && (
-                  <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 sm:p-5 border border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-3 sm:mb-4 flex items-center text-sm sm:text-base">
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-primary-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="bg-slate-50 rounded-xl p-3 sm:p-5 border border-slate-200 shadow-xs">
+                    <h3 className="font-extrabold text-slate-900 mb-3 sm:mb-4 flex items-center text-sm sm:text-base">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-brand-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                       </svg>
                       <span className="break-words">ATS Score Components</span>
@@ -164,12 +202,12 @@ function ResultsPanel({ results }) {
                       {Object.entries(resume.detailed_scoring.ats_score.component_scores).map(([key, value]) => {
                         const weight = resume.detailed_scoring.ats_score.weights[key.replace('_score', '')] || 0;
                         return (
-                          <div key={key} className="bg-white rounded-lg p-2 sm:p-3 border border-gray-200">
-                            <p className="text-xs text-gray-600 mb-1 capitalize break-words leading-tight">
+                          <div key={key} className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 shadow-xs">
+                            <p className="text-xs font-bold text-slate-700 mb-1 capitalize break-words leading-tight">
                               {key.replace('_score', '').replace('_', ' ')}
                             </p>
-                            <p className="text-xl sm:text-2xl font-bold text-gray-800">{value}%</p>
-                            <p className="text-xs text-gray-500 mt-1">Weight: {(weight * 100).toFixed(0)}%</p>
+                            <p className="text-xl sm:text-2xl font-extrabold text-slate-900">{value}%</p>
+                            <p className="text-[11px] font-bold text-slate-500 mt-1">Weight: {(weight * 100).toFixed(0)}%</p>
                           </div>
                         );
                       })}
@@ -179,9 +217,9 @@ function ResultsPanel({ results }) {
 
                 {/* Skills Summary */}
                 {resume.skills_breakdown && (
-                  <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
-                    <h3 className="font-semibold text-gray-800 mb-4 flex items-center">
-                      <svg className="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 shadow-xs">
+                    <h3 className="font-extrabold text-slate-900 mb-4 flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                         <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
@@ -192,26 +230,26 @@ function ResultsPanel({ results }) {
                         const total = skills.matched.length + skills.missing.length;
                         const matchPercent = total > 0 ? Math.round((skills.matched.length / total) * 100) : 0;
                         return (
-                          <div key={category} className="bg-white p-4 rounded-lg border border-gray-200">
+                          <div key={category} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
                             <div className="flex items-center justify-between mb-2">
-                              <h4 className="font-medium text-gray-800 capitalize">
+                              <h4 className="font-bold text-slate-900 capitalize">
                                 {category.replace('_', ' ')}
                               </h4>
-                              <span className="text-xs font-semibold text-gray-600">
+                              <span className="text-xs font-extrabold text-slate-700">
                                 {skills.matched.length}/{total}
                               </span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div className="w-full bg-slate-200 rounded-full h-2 mb-2">
                               <div
                                 className={`h-2 rounded-full ${
-                                  matchPercent >= 75 ? 'bg-success-500' :
-                                  matchPercent >= 50 ? 'bg-warning-500' :
-                                  'bg-danger-500'
+                                  matchPercent >= 75 ? 'bg-emerald-600' :
+                                  matchPercent >= 50 ? 'bg-amber-500' :
+                                  'bg-rose-600'
                                 }`}
                                 style={{ width: `${matchPercent}%` }}
                               />
                             </div>
-                            <p className="text-xs text-gray-600">{matchPercent}% matched</p>
+                            <p className="text-xs font-bold text-slate-700">{matchPercent}% matched</p>
                           </div>
                         );
                       })}
@@ -245,56 +283,56 @@ function ResultsPanel({ results }) {
                   <>
                     {/* Experience Gap Analysis */}
                     {resume.ai_insights.experience_gap_analysis && (
-                      <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 border-2 border-purple-300 rounded-lg p-3 sm:p-6">
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-6 shadow-xs">
                         <div className="flex items-start mb-4">
                           <div className="flex-shrink-0">
-                            <svg className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-6 h-6 sm:w-8 sm:h-8 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                             </svg>
                           </div>
                           <div className="ml-3 sm:ml-4 flex-1 min-w-0">
-                            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2 break-words">Experience Gap Analysis</h3>
+                            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 mb-2 break-words">Experience Gap Analysis</h3>
                             <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
-                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1 truncate">Required</p>
-                                <p className="text-lg sm:text-2xl font-bold text-purple-700 break-words">
+                              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 shadow-xs">
+                                <p className="text-xs font-bold text-slate-700 mb-1 truncate">Required</p>
+                                <p className="text-lg sm:text-2xl font-extrabold text-brand-700 break-words">
                                   {resume.ai_insights.experience_gap_analysis.required_years || 'N/A'}
                                   {resume.ai_insights.experience_gap_analysis.required_years && ' yrs'}
                                 </p>
                               </div>
-                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1 truncate">Your Exp.</p>
-                                <p className="text-lg sm:text-2xl font-bold text-purple-700 break-words">
+                              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 shadow-xs">
+                                <p className="text-xs font-bold text-slate-700 mb-1 truncate">Your Exp.</p>
+                                <p className="text-lg sm:text-2xl font-extrabold text-brand-700 break-words">
                                   {resume.ai_insights.experience_gap_analysis.candidate_years || 'N/A'}
                                   {resume.ai_insights.experience_gap_analysis.candidate_years && ' yrs'}
                                 </p>
                               </div>
-                              <div className="bg-white rounded-lg p-2 sm:p-3 border border-purple-200">
-                                <p className="text-xs text-gray-600 mb-1 truncate">Gap</p>
-                                <p className={`text-lg sm:text-2xl font-bold break-words ${
-                                  (resume.ai_insights.experience_gap_analysis.gap || 0) <= 0 ? 'text-success-700' : 'text-danger-700'
+                              <div className="bg-white rounded-xl p-2.5 sm:p-3 border border-slate-200 shadow-xs">
+                                <p className="text-xs font-bold text-slate-700 mb-1 truncate">Gap</p>
+                                <p className={`text-lg sm:text-2xl font-extrabold break-words ${
+                                  (resume.ai_insights.experience_gap_analysis.gap || 0) <= 0 ? 'text-emerald-700' : 'text-rose-700'
                                 }`}>
                                   {resume.ai_insights.experience_gap_analysis.gap > 0 ? '-' : '+'}
                                   {Math.abs(resume.ai_insights.experience_gap_analysis.gap || 0)} yrs
                                 </p>
                               </div>
                             </div>
-                            <div className="bg-white/70 rounded-lg p-3 sm:p-4 mb-3">
-                              <p className="text-sm sm:text-base text-gray-800 leading-relaxed break-words">
+                            <div className="bg-white rounded-xl p-3 sm:p-4 mb-3 border border-slate-200">
+                              <p className="text-sm font-semibold text-slate-900 leading-relaxed break-words">
                                 {resume.ai_insights.experience_gap_analysis.insight}
                               </p>
                             </div>
                             {resume.ai_insights.experience_gap_analysis.suggestions &&
                              resume.ai_insights.experience_gap_analysis.suggestions.length > 0 && (
                               <div>
-                                <p className="text-sm font-semibold text-purple-800 mb-2">Actionable Suggestions:</p>
+                                <p className="text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-2">Actionable Suggestions:</p>
                                 <ul className="space-y-2">
                                   {resume.ai_insights.experience_gap_analysis.suggestions.map((suggestion, idx) => (
-                                    <li key={idx} className="flex items-start bg-white/70 rounded-lg p-3">
-                                      <svg className="w-5 h-5 text-purple-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <li key={idx} className="flex items-start bg-white rounded-xl p-3 border border-slate-200">
+                                      <svg className="w-5 h-5 text-brand-600 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                       </svg>
-                                      <span className="text-gray-700">{suggestion}</span>
+                                      <span className="text-xs sm:text-sm font-semibold text-slate-900">{suggestion}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -308,28 +346,28 @@ function ResultsPanel({ results }) {
                     {/* Critical Missing Skills with Deep Analysis */}
                     {resume.ai_insights.critical_missing_skills &&
                      resume.ai_insights.critical_missing_skills.length > 0 && (
-                      <div className="bg-gradient-to-br from-red-50 to-red-100/50 border-2 border-red-300 rounded-lg p-3 sm:p-6">
-                        <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center">
-                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="bg-rose-50/70 border border-rose-200 rounded-2xl p-3 sm:p-6 shadow-xs">
+                        <h3 className="text-base sm:text-lg font-extrabold text-rose-950 mb-3 sm:mb-4 flex items-center">
+                          <svg className="w-5 h-5 sm:w-6 sm:h-6 text-rose-700 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                           </svg>
                           <span className="break-words">Critical Missing Skills - Deep Analysis</span>
                         </h3>
                         <div className="space-y-3 sm:space-y-4">
                           {resume.ai_insights.critical_missing_skills.map((skillAnalysis, idx) => (
-                            <div key={idx} className="bg-white rounded-lg p-3 sm:p-5 border-2 border-red-200 shadow-sm">
+                            <div key={idx} className="bg-white rounded-xl p-3 sm:p-5 border border-rose-200 shadow-xs">
                               <div className="flex items-start justify-between mb-3 gap-2">
-                                <h4 className="text-lg sm:text-xl font-bold text-red-700 break-words flex-1">{skillAnalysis.skill}</h4>
+                                <h4 className="text-lg sm:text-xl font-extrabold text-rose-900 break-words flex-1">{skillAnalysis.skill}</h4>
                                 <Badge variant="danger" size="sm" className="flex-shrink-0">Critical</Badge>
                               </div>
                               <div className="space-y-2 sm:space-y-3">
                                 <div>
-                                  <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-1">Why This Matters:</p>
-                                  <p className="text-sm text-gray-600 bg-red-50/50 rounded p-2 sm:p-3 break-words">{skillAnalysis.importance}</p>
+                                  <p className="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-1">Why This Matters:</p>
+                                  <p className="text-xs sm:text-sm font-semibold text-slate-900 bg-rose-50 rounded-xl p-3 border border-rose-200/60 break-words">{skillAnalysis.importance}</p>
                                 </div>
                                 <div>
-                                  <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-1">How to Demonstrate:</p>
-                                  <p className="text-sm text-gray-600 bg-green-50/50 rounded p-2 sm:p-3 break-words">{skillAnalysis.how_to_demonstrate}</p>
+                                  <p className="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-1">How to Demonstrate:</p>
+                                  <p className="text-xs sm:text-sm font-semibold text-slate-900 bg-emerald-50 rounded-xl p-3 border border-emerald-200/60 break-words">{skillAnalysis.how_to_demonstrate}</p>
                                 </div>
                               </div>
                             </div>
@@ -341,11 +379,11 @@ function ResultsPanel({ results }) {
                 )}
 
                 {!resume.ai_insights && (
-                  <div className="text-center py-12 text-gray-500">
-                    <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="text-center py-12 text-slate-500">
+                    <svg className="w-16 h-16 text-slate-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
-                    <p>AI insights not available for this analysis</p>
+                    <p className="font-semibold text-slate-600">AI insights not available for this analysis</p>
                   </div>
                 )}
               </div>
@@ -356,53 +394,79 @@ function ResultsPanel({ results }) {
               <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
                 {resume.skills_breakdown && Object.entries(resume.skills_breakdown).map(([category, skills]) => (
                   (skills.matched.length > 0 || skills.missing.length > 0) && (
-                    <div key={category} className="border border-gray-200 rounded-lg p-5 bg-white">
-                      <h3 className="font-semibold text-gray-800 mb-4 capitalize text-lg flex items-center">
+                    <div key={category} className="border border-slate-200 rounded-xl p-5 bg-white shadow-xs">
+                      <h3 className="font-extrabold text-slate-900 mb-4 capitalize text-lg flex items-center">
                         {getCategoryIcon(category)}
                         <span className="ml-2">{category.replace('_', ' ')}</span>
-                        <Badge variant="default" size="sm" className="ml-3">
+                        <Badge variant="default" size="sm" className="ml-3 font-bold">
                           {skills.matched.length + skills.missing.length} total
                         </Badge>
                       </h3>
-
-                      {skills.matched.length > 0 && (
-                        <div className="mb-4">
-                          <p className="text-sm font-medium text-success-700 mb-3 flex items-center">
-                            <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
-                            Matched Skills ({skills.matched.length})
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {skills.matched.map((skill, idx) => (
-                              <Badge key={idx} variant="matched" size="md">
-                                {skill}
-                              </Badge>
-                            ))}
+                      <div className="space-y-4">
+                        {skills.matched.length > 0 && (
+                          <div>
+                            <p className="text-xs font-extrabold text-emerald-800 uppercase tracking-wider mb-2 flex items-center">
+                              <svg className="w-4 h-4 mr-1 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              Matched ({skills.matched.length})
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {skills.matched.map((skill, idx) => (
+                                <Badge key={idx} variant="success" size="md">{skill}</Badge>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      )}
-
-                      {skills.missing.length > 0 && (
-                        <div>
-                          <p className="text-sm font-medium text-danger-700 mb-3 flex items-center">
-                            <svg className="w-4 h-4 mr-1.5" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                            </svg>
-                            Missing Skills ({skills.missing.length})
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {skills.missing.map((skill, idx) => (
-                              <Badge key={idx} variant="missing" size="md">
-                                {skill}
-                              </Badge>
-                            ))}
+                        )}
+                        {skills.missing.length > 0 && (
+                          <div>
+                            <p className="text-xs font-extrabold text-rose-800 uppercase tracking-wider mb-2 flex items-center">
+                              <svg className="w-4 h-4 mr-1 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                              </svg>
+                              Missing ({skills.missing.length})
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                              {skills.missing.map((skill, idx) => (
+                                <Badge key={idx} variant="danger" size="md">{skill}</Badge>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
                     </div>
                   )
                 ))}
+              </div>
+            </TabPanel>
+
+            {/* ATS Visualizer Tab */}
+            <TabPanel id="ats_text">
+              <div className="p-3 sm:p-6">
+                <AtsTextVisualizer
+                  rawText={resume.raw_text_parsed}
+                  fileName={resume.filename}
+                  formattingChecks={resume.formatting_checks}
+                />
+              </div>
+            </TabPanel>
+
+            {/* AI Cover Letter Tab */}
+            <TabPanel id="cover_letter">
+              <div className="p-3 sm:p-6">
+                <CoverLetterGenerator
+                  coverLetterData={resume.ai_cover_letter}
+                  fileName={resume.filename}
+                />
+              </div>
+            </TabPanel>
+
+            {/* AI Interview Prep Tab */}
+            <TabPanel id="interview_prep">
+              <div className="p-3 sm:p-6">
+                <InterviewPrep
+                  prepData={resume.interview_prep}
+                />
               </div>
             </TabPanel>
 
@@ -413,20 +477,20 @@ function ResultsPanel({ results }) {
                   <>
                     {/* Priority Skills */}
                     {resume.recommendations.skills_to_add?.length > 0 && (
-                      <div className="bg-gradient-to-br from-warning-50 to-warning-100/50 border border-warning-200 rounded-lg p-3 sm:p-5">
-                        <h3 className="font-semibold text-gray-800 mb-3 sm:mb-4 flex items-center text-base sm:text-lg">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-warning-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3 sm:p-5 shadow-xs">
+                        <h3 className="font-extrabold text-amber-950 mb-3 sm:mb-4 flex items-center text-base sm:text-lg">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
                           <span className="break-words">Priority Skills to Add</span>
                         </h3>
                         <div className="space-y-2 sm:space-y-3">
                           {resume.recommendations.skills_to_add.slice(0, 8).map((rec, idx) => (
-                            <div key={idx} className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border border-warning-200/50 hover:border-primary-300 transition-colors">
+                            <div key={idx} className="bg-white p-3 sm:p-4 rounded-xl shadow-xs border border-amber-200 transition-colors">
                               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
                                 <div className="flex-1 min-w-0">
                                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                                    <span className="font-semibold text-gray-900 break-words">{rec.skill}</span>
+                                    <span className="font-extrabold text-slate-900 break-words">{rec.skill}</span>
                                     <Badge
                                       variant={
                                         rec.priority === 'critical' ? 'danger' :
@@ -437,31 +501,31 @@ function ResultsPanel({ results }) {
                                     >
                                       {rec.priority}
                                     </Badge>
-                                    <span className="text-xs text-gray-500 capitalize break-words">• {rec.category}</span>
+                                    <span className="text-xs font-bold text-slate-600 capitalize break-words">• {rec.category}</span>
                                   </div>
                                   {rec.reason && (
-                                    <p className="text-xs sm:text-sm text-gray-600 break-words">{rec.reason}</p>
+                                    <p className="text-xs sm:text-sm font-semibold text-slate-700 break-words">{rec.reason}</p>
                                   )}
                                 </div>
                                 <div className="sm:ml-4 flex-shrink-0">
-                                  <span className="text-base sm:text-lg font-bold text-success-600">+{rec.impact}</span>
+                                  <span className="text-base sm:text-lg font-extrabold text-emerald-700">+{rec.impact}</span>
                                 </div>
                               </div>
 
-                              {/* NEW: Suggested Experience Bullets */}
+                              {/* Suggested Experience Bullets */}
                               {rec.suggested_experience_bullets && rec.suggested_experience_bullets.length > 0 && (
-                                <div className="mt-3 pt-3 border-t border-gray-200">
-                                  <p className="text-xs font-semibold text-indigo-700 mb-2 flex items-center">
-                                    <svg className="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <div className="mt-3 pt-3 border-t border-slate-200">
+                                  <p className="text-xs font-extrabold text-brand-800 mb-2 flex items-center">
+                                    <svg className="w-4 h-4 mr-1 flex-shrink-0 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
                                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                     </svg>
-                                    <span className="break-words">Suggested Resume Bullets:</span>
+                                    <span className="break-words uppercase tracking-wider">Suggested Resume Bullets:</span>
                                   </p>
                                   <ul className="space-y-2">
                                     {rec.suggested_experience_bullets.map((bullet, bidx) => (
-                                      <li key={bidx} className="text-xs sm:text-sm bg-indigo-50 border border-indigo-200 rounded p-2 sm:p-3 flex items-start">
-                                        <span className="text-indigo-600 mr-2 flex-shrink-0">•</span>
-                                        <span className="text-gray-700 italic break-words">{bullet}</span>
+                                      <li key={bidx} className="text-xs sm:text-sm bg-brand-50 border border-brand-200/80 rounded-xl p-2.5 sm:p-3 flex items-start">
+                                        <span className="text-brand-600 mr-2 flex-shrink-0 font-bold">•</span>
+                                        <span className="text-slate-900 font-semibold italic break-words">{bullet}</span>
                                       </li>
                                     ))}
                                   </ul>
@@ -475,9 +539,9 @@ function ResultsPanel({ results }) {
 
                     {/* NEW: Experience Section Improvements */}
                     {resume.recommendations.experience_section_improvements?.length > 0 && (
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100/50 border border-blue-300 rounded-lg p-5">
-                        <h3 className="font-semibold text-gray-800 mb-4 flex items-center text-lg">
-                          <svg className="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-xs">
+                        <h3 className="font-extrabold text-slate-900 mb-4 flex items-center text-lg">
+                          <svg className="w-5 h-5 mr-2 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
                             <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
                           </svg>
@@ -485,28 +549,28 @@ function ResultsPanel({ results }) {
                         </h3>
                         <div className="space-y-4">
                           {resume.recommendations.experience_section_improvements.map((imp, idx) => (
-                            <div key={idx} className="bg-white rounded-lg p-4 border border-blue-200">
+                            <div key={idx} className="bg-white rounded-xl p-4 border border-slate-200 shadow-xs">
                               <div className="mb-3">
-                                <p className="text-sm font-semibold text-red-700 mb-2 flex items-center">
-                                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <p className="text-xs font-extrabold text-rose-800 uppercase tracking-wider mb-2 flex items-center">
+                                  <svg className="w-4 h-4 mr-1 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                                   </svg>
                                   Current Weakness:
                                 </p>
-                                <p className="text-gray-700 bg-red-50 rounded p-2 text-sm">{imp.current_weakness}</p>
+                                <p className="text-slate-900 bg-rose-50 border border-rose-200/60 rounded-xl p-3 text-xs sm:text-sm font-semibold">{imp.current_weakness}</p>
                               </div>
                               <div className="mb-3">
-                                <p className="text-sm font-semibold text-green-700 mb-2 flex items-center">
-                                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <p className="text-xs font-extrabold text-emerald-800 uppercase tracking-wider mb-2 flex items-center">
+                                  <svg className="w-4 h-4 mr-1 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                   </svg>
                                   Suggested Bullet Point:
                                 </p>
-                                <p className="text-gray-800 bg-green-50 rounded p-2 text-sm font-medium italic">{imp.suggested_bullet}</p>
+                                <p className="text-slate-900 bg-emerald-50 border border-emerald-200/60 rounded-xl p-3 text-xs sm:text-sm font-semibold italic">{imp.suggested_bullet}</p>
                               </div>
                               {imp.skills_addressed && imp.skills_addressed.length > 0 && (
-                                <div className="flex flex-wrap gap-1 pt-2 border-t border-blue-100">
-                                  <span className="text-xs text-gray-600 mr-2">Addresses:</span>
+                                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
+                                  <span className="text-xs font-bold text-slate-700 mr-2">Addresses:</span>
                                   {imp.skills_addressed.map((skill, sidx) => (
                                     <Badge key={sidx} variant="info" size="sm">{skill}</Badge>
                                   ))}
@@ -520,8 +584,8 @@ function ResultsPanel({ results }) {
 
                     {/* NEW: Project Section Improvements */}
                     {resume.recommendations.project_section_improvements?.length > 0 && (
-                      <div className="bg-gradient-to-br from-teal-50 to-teal-100/50 border border-teal-300 rounded-lg p-5">
-                        <h3 className="font-semibold text-gray-800 mb-4 flex items-center text-lg">
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-xs">
+                        <h3 className="font-extrabold text-slate-900 mb-4 flex items-center text-lg">
                           <svg className="w-5 h-5 mr-2 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
                           </svg>
@@ -529,19 +593,19 @@ function ResultsPanel({ results }) {
                         </h3>
                         <div className="space-y-4">
                           {resume.recommendations.project_section_improvements.map((proj, idx) => (
-                            <div key={idx} className="bg-white rounded-lg p-4 border border-teal-200">
+                            <div key={idx} className="bg-white rounded-xl p-4 border border-slate-200 shadow-xs">
                               <div className="flex items-center mb-3">
                                 <Badge variant="warning" size="sm" className="mr-2">Missing Skill</Badge>
-                                <span className="font-semibold text-gray-900">{proj.missing_skill}</span>
+                                <span className="font-extrabold text-slate-900">{proj.missing_skill}</span>
                               </div>
                               <div>
-                                <p className="text-sm font-semibold text-teal-700 mb-2 flex items-center">
-                                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                <p className="text-xs font-extrabold text-teal-800 uppercase tracking-wider mb-2 flex items-center">
+                                  <svg className="w-4 h-4 mr-1 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                   </svg>
                                   Suggested Project Description:
                                 </p>
-                                <p className="text-gray-800 bg-teal-50 rounded p-3 text-sm italic leading-relaxed">
+                                <p className="text-slate-900 bg-teal-50 border border-teal-200/60 rounded-xl p-3 text-xs sm:text-sm font-semibold italic leading-relaxed">
                                   {proj.suggested_project_description}
                                 </p>
                               </div>
@@ -553,17 +617,17 @@ function ResultsPanel({ results }) {
 
                     {/* General Improvements */}
                     {resume.recommendations.resume_improvements?.length > 0 && (
-                      <div className="bg-info-50 border border-info-200 rounded-lg p-5">
-                        <h3 className="font-semibold text-gray-800 mb-4 flex items-center text-lg">
-                          <svg className="w-5 h-5 mr-2 text-info-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-xs">
+                        <h3 className="font-extrabold text-slate-900 mb-4 flex items-center text-lg">
+                          <svg className="w-5 h-5 mr-2 text-brand-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                           </svg>
                           General Improvements
                         </h3>
                         <ul className="space-y-2">
                           {resume.recommendations.resume_improvements.map((imp, idx) => (
-                            <li key={idx} className="flex items-start text-gray-700">
-                              <svg className="w-5 h-5 mr-2 text-info-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <li key={idx} className="flex items-start text-slate-900 bg-white p-3 rounded-xl border border-slate-200 font-semibold text-xs sm:text-sm">
+                              <svg className="w-5 h-5 mr-2 text-brand-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                               </svg>
                               <span>{imp}</span>
@@ -575,18 +639,18 @@ function ResultsPanel({ results }) {
 
                     {/* Potential Score */}
                     {resume.recommendations.estimated_score_with_improvements && (
-                      <div className="bg-success-50 border border-success-200 rounded-lg p-5">
+                      <div className="bg-emerald-50 border border-emerald-200/90 rounded-2xl p-5 shadow-xs">
                         <div className="flex items-center justify-between">
                           <div>
-                            <h3 className="font-semibold text-gray-800 mb-1">Potential ATS Score</h3>
-                            <p className="text-sm text-gray-600">With all recommended improvements</p>
+                            <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-1">Potential Target ATS Score</h3>
+                            <p className="text-xs sm:text-sm font-semibold text-slate-700">With all recommended skill & section improvements incorporated</p>
                           </div>
                           <div className="text-right">
-                            <div className="text-4xl font-bold text-success-600">
+                            <div className="text-3xl sm:text-4xl font-extrabold text-emerald-700">
                               {resume.recommendations.estimated_score_with_improvements}%
                             </div>
-                            <div className="text-sm text-success-700 font-medium">
-                              +{resume.recommendations.estimated_score_with_improvements - atsScore}% improvement
+                            <div className="text-xs sm:text-sm font-extrabold text-emerald-900">
+                              +{resume.recommendations.estimated_score_with_improvements - atsScore}% projected boost
                             </div>
                           </div>
                         </div>

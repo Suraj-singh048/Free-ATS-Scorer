@@ -1,9 +1,11 @@
 import React from 'react';
 
-export const Card = ({ children, className = '', ...props }) => {
+export const Card = ({ children, className = '', elevated = false, ...props }) => {
   return (
     <div
-      className={`bg-white rounded-xl shadow-soft border border-gray-100 overflow-hidden ${className}`}
+      className={`bg-white rounded-2xl ${
+        elevated ? 'shadow-card border border-slate-200/80' : 'shadow-soft border border-slate-200/60'
+      } overflow-hidden transition-all duration-200 ${className}`}
       {...props}
     >
       {children}
@@ -11,20 +13,20 @@ export const Card = ({ children, className = '', ...props }) => {
   );
 };
 
-export const CardHeader = ({ children, gradient, className = '', ...props }) => {
-  const gradientClasses = {
-    primary: 'bg-gradient-to-r from-primary-500 to-primary-600',
-    secondary: 'bg-gradient-to-r from-secondary-500 to-secondary-600',
-    success: 'bg-gradient-to-r from-success-500 to-success-600',
-    turquoise: 'bg-gradient-to-br from-primary-400 to-secondary-500',
+export const CardHeader = ({ children, variant = 'default', className = '', ...props }) => {
+  const variantClasses = {
+    default: 'bg-slate-50/80 border-b border-slate-200/80 text-slate-900',
+    brand: 'bg-gradient-to-r from-slate-900 via-brand-900 to-slate-900 text-white border-b border-slate-800',
+    emerald: 'bg-gradient-to-r from-emerald-800 to-teal-900 text-white border-b border-emerald-700',
+    violet: 'bg-gradient-to-r from-violet-900 to-slate-900 text-white border-b border-violet-800',
+    turquoise: 'bg-gradient-to-r from-slate-900 to-teal-900 text-white border-b border-teal-800',
   };
 
-  const bgClass = gradient ? gradientClasses[gradient] : 'bg-gray-50 border-b border-gray-200';
-  const textClass = gradient ? 'text-white' : 'text-gray-900';
+  const bgClass = variantClasses[variant] || variantClasses.default;
 
   return (
     <div
-      className={`px-6 py-4 ${bgClass} ${textClass} ${className}`}
+      className={`px-6 py-4.5 ${bgClass} ${className}`}
       {...props}
     >
       {children}
@@ -34,7 +36,7 @@ export const CardHeader = ({ children, gradient, className = '', ...props }) => 
 
 export const CardBody = ({ children, className = '', ...props }) => {
   return (
-    <div className={`px-6 py-5 ${className}`} {...props}>
+    <div className={`px-6 py-5 text-slate-800 ${className}`} {...props}>
       {children}
     </div>
   );
@@ -43,7 +45,7 @@ export const CardBody = ({ children, className = '', ...props }) => {
 export const CardFooter = ({ children, className = '', ...props }) => {
   return (
     <div
-      className={`px-6 py-4 bg-gray-50 border-t border-gray-200 ${className}`}
+      className={`px-6 py-4 bg-slate-50/90 border-t border-slate-200/80 text-slate-700 ${className}`}
       {...props}
     >
       {children}

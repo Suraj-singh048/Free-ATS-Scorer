@@ -1,5 +1,5 @@
-/* Import Inter font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Import Inter & Plus Jakarta Sans fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 /* Import custom animations */
 @import './styles/animations.css';
@@ -8,25 +8,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-100 font-sans antialiased;
+  }
+  ::selection {
+    background-color: #6366f1;
+    color: #ffffff;
+  }
+}
+
 /* Custom scrollbar styling */
 @layer utilities {
   .scrollbar-thin::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(15, 23, 42, 0.05);
     border-radius: 4px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #cbd5e1;
     border-radius: 4px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #94a3b8;
   }
 
   /* Hide scrollbar but keep functionality */
@@ -40,9 +50,15 @@
   }
 }
 
-/* Smooth transitions */
-* {
-  transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+/* High contrast glassmorphic card utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.6);
 }

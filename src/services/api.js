@@ -4,11 +4,13 @@ import axios from 'axios';
  * Submit job description and resumes for ATS analysis
  * @param {string} jobDescription - Job description text
  * @param {File[]} files - Array of resume files
+ * @param {string} mode - 'job_match' | 'resume_only'
  * @returns {Promise<Object>} - API response with results
  */
-export async function analyzeResumes(jobDescription, files) {
+export async function analyzeResumes(jobDescription, files, mode = 'job_match') {
   const formData = new FormData();
-  formData.append('job_description', jobDescription);
+  formData.append('job_description', jobDescription || '');
+  formData.append('analysis_mode', mode);
 
   // Append all resume files
   files.forEach((file) => {

@@ -10,40 +10,43 @@ const Badge = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center font-medium rounded-full transition-all duration-200';
+  const baseStyles = 'inline-flex items-center font-bold tracking-tight rounded-full transition-all duration-150 shadow-xs';
 
   const variants = {
-    default: 'bg-gray-100 text-gray-700 border border-gray-300',
-    primary: 'bg-primary-100 text-primary-700 border border-primary-200',
-    secondary: 'bg-secondary-100 text-secondary-700 border border-secondary-200',
-    success: 'bg-success-100 text-success-700 border border-success-200',
-    warning: 'bg-warning-100 text-warning-700 border border-warning-200',
-    danger: 'bg-danger-100 text-danger-700 border border-danger-200',
-    info: 'bg-info-100 text-info-700 border border-info-200',
-    matched: 'bg-success-100 text-success-700 border border-success-300 shadow-sm',
-    missing: 'bg-danger-100 text-danger-700 border border-danger-300 shadow-sm',
-    high: 'bg-warning-100 text-warning-700 border border-warning-300 font-semibold',
-    medium: 'bg-info-100 text-info-700 border border-info-300',
-    low: 'bg-gray-100 text-gray-600 border border-gray-300',
+    default: 'bg-slate-100 text-slate-800 border border-slate-300/80',
+    primary: 'bg-brand-50 text-brand-900 border border-brand-300 font-semibold',
+    secondary: 'bg-teal-50 text-teal-900 border border-teal-300 font-semibold',
+    success: 'bg-emerald-100 text-emerald-950 border border-emerald-300/80 font-bold',
+    warning: 'bg-amber-100 text-amber-950 border border-amber-300/80 font-bold',
+    danger: 'bg-rose-100 text-rose-950 border border-rose-300/80 font-bold',
+    info: 'bg-sky-100 text-sky-950 border border-sky-300/80 font-semibold',
+    matched: 'bg-emerald-100 text-emerald-950 border border-emerald-300 font-bold',
+    missing: 'bg-rose-100 text-rose-950 border border-rose-300 font-bold',
+    high: 'bg-amber-100 text-amber-950 border border-amber-400 font-bold',
+    medium: 'bg-slate-100 text-slate-800 border border-slate-300',
+    low: 'bg-slate-50 text-slate-600 border border-slate-200',
+    brand: 'bg-brand-600 text-white font-bold',
+    violet: 'bg-violet-100 text-violet-950 border border-violet-300 font-bold',
   };
 
   const sizes = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-1.5 text-base',
+    sm: 'px-2.5 py-0.5 text-xs',
+    md: 'px-3 py-1 text-xs sm:text-sm',
+    lg: 'px-4 py-1.5 text-sm sm:text-base',
   };
 
   return (
     <span
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${baseStyles} ${variants[variant] || variants.default} ${sizes[size]} ${className}`}
       {...props}
     >
-      {icon && <span className="mr-1.5">{icon}</span>}
+      {icon && <span className="mr-1.5 flex-shrink-0">{icon}</span>}
       <span>{children}</span>
       {removable && (
         <button
+          type="button"
           onClick={onRemove}
-          className="ml-1.5 hover:bg-black/10 rounded-full p-0.5 transition-colors focus:outline-none"
+          className="ml-1.5 hover:bg-slate-900/10 rounded-full p-0.5 transition-colors focus:outline-none"
           aria-label={`Remove ${children}`}
         >
           <svg
@@ -55,7 +58,7 @@ const Badge = ({
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={2.5}
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
